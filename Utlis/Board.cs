@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -40,5 +41,28 @@ namespace Bomberman.Utlis
         public int Width { get; set; }
         public int Height { get; set; }
         public Unit[,] Units { get; set; }
+
+        public void AddPlayer(HumanPlayer player, ContentManager manager)
+        {
+            bool isAdded = false;
+            for (var i = 0; i < Height; i++)
+            {
+                for (var j = 0; j < Width; j++)
+                {
+                    if (Units[i, j].UnitState == State.Empty)
+                    {
+                        Units[i, j].Initialize(manager, State.Player);
+                        Units[i, j].UnitState = State.Player;
+                        isAdded = true;
+                        player.CurrentUnit = Units[i, j];
+                        break;
+                    }
+                }
+                if (isAdded)
+                {
+                    break;
+                }
+            }
+        }
     }
 }

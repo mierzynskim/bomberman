@@ -35,9 +35,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\MoveUnitCommand.cs" />
+    <Compile Include="GameActor.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameSession.cs" />
+    <Compile Include="Players\ComputerPlayer.cs" />
+    <Compile Include="Players\HumanPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceInfo.cs" />
@@ -52,6 +56,7 @@
     <Compile Include="StateInterfaces\ISaveScores.cs" />
     <Compile Include="TreasureState.cs" />
     <Compile Include="Utlis\Board.cs" />
+    <Compile Include="Utlis\Direction.cs" />
     <Compile Include="Utlis\Level.cs" />
     <Compile Include="Utlis\Unit.cs" />
   </ItemGroup>
@@ -64,6 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\concrete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

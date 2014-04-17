@@ -10,7 +10,8 @@ namespace Bomberman
         public static Dictionary<State, string> Resources = new Dictionary<State, string>
         {
             {State.Concrete, "concrete.png"},
-            {State.Wall, "wall.png"}
+            {State.Wall, "wall.png"},
+            {State.Player, "player.png"}
         };
 
     }

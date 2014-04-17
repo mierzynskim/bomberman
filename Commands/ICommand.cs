@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bomberman.Commands
 {
-    interface ICommand
+    public interface ICommand
     {
         void Execute(GameActor actor);
     }

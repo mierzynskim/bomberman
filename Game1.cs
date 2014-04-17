@@ -1,6 +1,8 @@
 ﻿#region Using Statements
 using System;
 using System.Collections.Generic;
+using Bomberman.Commands;
+using Bomberman.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,6 +21,7 @@ namespace Bomberman
         private GraphicsDeviceManager graphics;
         private GameSession gameController;
         private SpriteBatch spriteBatch;
+        private HumanPlayer player;
 
         private readonly int windowHeight = 33 * 20;
         private readonly int windowWidth = 33 * 20;
@@ -45,6 +48,7 @@ namespace Bomberman
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -58,6 +62,9 @@ namespace Bomberman
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             gameController = new GameSession(Content);
+            player = new HumanPlayer();
+            gameController.Board.AddPlayer(player, Content);
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -68,6 +75,7 @@ namespace Bomberman
         /// </summary>
         protected override void UnloadContent()
         {
+
             // TODO: Unload any non ContentManager content here
         }
 
@@ -82,6 +90,15 @@ namespace Bomberman
                 Exit();
 
             // TODO: Add your update logic here
+            var currentKeyboardState = Keyboard.GetState();
+            //TODO refactor double player passing
+            var command = gameController.HandleInput(currentKeyboardState, player);
+            if (command != null)
+            {
+               command.Execute(player); 
+            }
+            
+
 
             base.Update(gameTime);
         }

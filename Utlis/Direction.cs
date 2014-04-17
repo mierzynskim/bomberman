@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bomberman
+namespace Bomberman.Utlis
 {
-    public enum State
+    public enum Direction
     {
-        Empty,
-        Wall,
-        Concrete,
-        Player
+        Up,
+        Down,
+        Left,
+        Right
     }
 }
