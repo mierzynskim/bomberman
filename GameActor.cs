@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Bomberman.Utlis;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Bomberman.Utlis;
 
 namespace Bomberman
 {

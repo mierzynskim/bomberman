@@ -63,7 +63,7 @@ namespace Bomberman
             spriteBatch = new SpriteBatch(GraphicsDevice);
             gameController = new GameSession(Content);
             player = new HumanPlayer();
-            gameController.Board.AddPlayer(player, Content);
+            GameSession.GameBoard.AddPlayer(player, Content);
 
 
             // TODO: use this.Content to load your game content here
@@ -91,8 +91,8 @@ namespace Bomberman
 
             // TODO: Add your update logic here
             var currentKeyboardState = Keyboard.GetState();
-            //TODO refactor double player passing
             var command = gameController.HandleInput(currentKeyboardState, player);
+            //TODO Fix movement
             if (command != null)
             {
                command.Execute(player); 

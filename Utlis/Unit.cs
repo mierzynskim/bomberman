@@ -26,9 +26,13 @@ namespace Bomberman.Utlis
         public int? PlayerId { get; set; }
         public void MoveTo(int x, int y)
         {
-            Position = new Vector2(33 * x, 33 * y);
-            X = x;
-            Y = y;
+            if (GameSession.IsMoveValid(x, y))
+            {
+                Position = new Vector2(33 * x, 33 * y);
+                X = x;
+                Y = y;
+            }
+
         }
 
         public void Initialize(ContentManager manager, State state)

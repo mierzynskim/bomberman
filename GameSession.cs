@@ -22,21 +22,21 @@ namespace Bomberman
         public Level DifficultyLevel { get; set; }
         public int EnemiesLeft { get; set; }
         public int KilledEnemies { get; set; }
-        public Board Board { get; set; }
+        public static Board GameBoard { get; private set; }
         public TreasureState TreasureState { get; set; }
 
         public GameSession(ContentManager manager)
         {
-            Board = new Board(20, 20, manager);
+            GameBoard = new Board(20, 20, manager);
 
         }
 
         public void RedrawBoard(SpriteBatch target)
         {
-            for (var i = 0; i < Board.Height; i++)
-                for (var j = 0; j < Board.Width; j++)
+            for (var i = 0; i < GameBoard.Height; i++)
+                for (var j = 0; j < GameBoard.Width; j++)
                 {
-                    Board.Units[i, j].Draw(target);
+                    GameBoard.Units[i, j].Draw(target);
                 }
         }
 
@@ -60,6 +60,13 @@ namespace Bomberman
                 return new MoveUnitCommand(Direction.Up, actor);
             }
             return null;
+        }
+
+        public static bool IsMoveValid(int x, int y)
+        {
+            return x > 0 && y > 0 && x < GameBoard.Width && y < GameBoard.Height &&
+                   GameBoard.Units[x, y].UnitState == State.Empty;
+
         }
 
 
