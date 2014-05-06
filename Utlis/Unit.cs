@@ -13,9 +13,11 @@ namespace Bomberman.Utlis
         private Vector2 Position { get; set; }
 
         private Texture2D texture;
+        
 
         public int X { get; set; }
         public int Y { get; set; }
+        
 
         public Unit(Vector2 position)
         {

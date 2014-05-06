@@ -10,6 +10,8 @@ namespace Bomberman
         Empty,
         Wall,
         Concrete,
-        Player
+        Player,
+        NormalBomb,
+        RemoteBomb
     }
 }

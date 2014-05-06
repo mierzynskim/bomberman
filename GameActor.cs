@@ -10,7 +10,7 @@ namespace Bomberman
         public int LevelPoints { get; set; }
         public int CurrentLevel { get; set; }
         public int OverallPoints { get; set; }
-        public Unit CurrentUnit { protected get; set; }
+        public Unit CurrentUnit { get; set; }
         public GameTime Time { get; set; }
         public abstract void Move(Direction direction);
     }

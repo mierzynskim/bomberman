@@ -5,13 +5,15 @@ using System.Text;
 
 namespace Bomberman
 {
-    public class ResourceInfo
+    public static class ResourceInfo
     {
-        public static Dictionary<State, string> Resources = new Dictionary<State, string>
+        public static readonly Dictionary<State, string> Resources = new Dictionary<State, string>
         {
             {State.Concrete, "concrete.png"},
             {State.Wall, "wall.png"},
-            {State.Player, "player.png"}
+            {State.Player, "player.png"},
+            {State.NormalBomb, "bomb.png"},
+            {State.RemoteBomb, "bomb.png"}
         };
 
     }

@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\MoveUnitCommand.cs" />
+    <Compile Include="Commands\PutNormalBomb.cs" />
     <Compile Include="GameActor.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Game1.cs" />
@@ -69,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bomb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

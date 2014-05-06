@@ -22,6 +22,7 @@ namespace Bomberman
         private GameSession gameController;
         private SpriteBatch spriteBatch;
         private HumanPlayer player;
+        
 
         private readonly int windowHeight = 33 * 20;
         private readonly int windowWidth = 33 * 20;

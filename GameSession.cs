@@ -14,6 +14,7 @@ namespace Bomberman
 {
     public class GameSession
     {
+        private ContentManager contentManager;
         public int Velocity { get; set; }
         public int LivesCount { get; set; }
         public DateTime GameDuration { get; set; }
@@ -28,6 +29,7 @@ namespace Bomberman
 
         public GameSession(ContentManager manager)
         {
+            contentManager = manager;
             GameBoard = new Board(20, 20, manager);
 
         }
@@ -60,6 +62,11 @@ namespace Bomberman
             {
                 return new MoveUnitCommand(Direction.Up, actor);
             }
+            if (currentKeyboardState.IsKeyDown(Keys.D1))
+            {
+                return new PutNormalBomb(contentManager);
+            }
+            
             return null;
         }
 

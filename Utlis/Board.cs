@@ -58,9 +58,7 @@ namespace Bomberman.Utlis
                     }
                 }
                 if (isAdded)
-                {
                     break;
-                }
             }
         }
     }
