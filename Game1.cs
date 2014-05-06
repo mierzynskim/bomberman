@@ -64,6 +64,7 @@ namespace Bomberman
             gameController = new GameSession(Content);
             player = new HumanPlayer();
             GameSession.GameBoard.AddPlayer(player, Content);
+            this.IsFixedTimeStep = false;
 
 
             // TODO: use this.Content to load your game content here
@@ -92,6 +93,7 @@ namespace Bomberman
             // TODO: Add your update logic here
             var currentKeyboardState = Keyboard.GetState();
             var command = gameController.HandleInput(currentKeyboardState, player);
+            player.Time = gameTime;
             //TODO Fix movement
             if (command != null)
             {

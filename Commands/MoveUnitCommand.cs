@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bomberman.Utlis;
+using Microsoft.Xna.Framework;
 
 namespace Bomberman.Commands
 {
@@ -18,6 +19,7 @@ namespace Bomberman.Commands
         public int Y { get; set; }
 
         private Direction direction;
+        private GameTime time;
 
         public GameActor Actor { get; set; }
 
