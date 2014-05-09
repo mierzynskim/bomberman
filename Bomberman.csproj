@@ -41,6 +41,19 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameSession.cs" />
+    <Compile Include="GameStateManagement\ScreenManager\GameScreen.cs" />
+    <Compile Include="GameStateManagement\ScreenManager\InputState.cs" />
+    <Compile Include="GameStateManagement\ScreenManager\ScreenManager.cs" />
+    <Compile Include="GameStateManagement\Screens\BackgroundScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\GameplayScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\LoadingScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\MainMenuScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\MenuEntry.cs" />
+    <Compile Include="GameStateManagement\Screens\MenuScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\MessageBoxScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\OptionsMenuScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\PauseMenuScreen.cs" />
+    <Compile Include="GameStateManagement\Screens\PlayerIndexEventArgs.cs" />
     <Compile Include="Players\ComputerPlayer.cs" />
     <Compile Include="Players\HumanPlayer.cs" />
     <Compile Include="Program.cs" />
@@ -70,7 +83,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\blank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\bomb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gradient.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\player.png">
@@ -84,7 +106,29 @@
     </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Content\background.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\blank.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\gamefont.spritefont">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\gamefont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\gradient.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\menufont.spritefont">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\menufont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

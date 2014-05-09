@@ -6,15 +6,13 @@ using Bomberman.Utlis;
 
 namespace Bomberman.Players
 {
-    public class HumanPlayer: GameActor
+    public class HumanPlayer : GameActor
     {
         public int Delay { get; set; }
 
         public override void Move(Direction direction)
         {
-            if (Delay == 1 || Delay == 2 || Delay == 4)
-                Delay = (Delay + 1) % 5;
-            else
+            if (Delay == 4)
             {
                 switch (direction)
                 {
@@ -31,10 +29,9 @@ namespace Bomberman.Players
                         CurrentUnit.MoveTo(CurrentUnit.X + 1, CurrentUnit.Y);
                         break;
                 }
-                Delay = (Delay + 1) % 5;
-
             }
-            
+            Delay = (Delay + 1) % 5;
+
         }
     }
 }
