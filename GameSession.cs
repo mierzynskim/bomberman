@@ -73,7 +73,7 @@ namespace Bomberman
         public static bool IsMoveValid(int x, int y)
         {
             return x > 0 && y > 0 && x < GameBoard.Width && y < GameBoard.Height &&
-                   GameBoard.Units[x, y].UnitState == State.Empty;
+                   GameBoard.Units[x, y].UnitState != State.Wall && GameBoard.Units[x, y].UnitState != State.Concrete;
 
         }
 
