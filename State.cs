@@ -12,6 +12,7 @@ namespace Bomberman
         Concrete,
         Player,
         NormalBomb,
-        RemoteBomb
+        RemoteBomb,
+        Enemy
     }
 }

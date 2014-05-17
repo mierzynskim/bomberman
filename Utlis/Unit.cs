@@ -5,10 +5,11 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Priority_Queue;
 
 namespace Bomberman.Utlis
 {
-    public class Unit
+    public class Unit : PriorityQueueNode
     {
         private Vector2 Position { get; set; }
 
@@ -18,6 +19,8 @@ namespace Bomberman.Utlis
 
         public int X { get; set; }
         public int Y { get; set; }
+
+        public Unit Parent { get; set; }
         
 
         public Unit(Vector2 position)
@@ -54,10 +57,8 @@ namespace Bomberman.Utlis
                 {
                     OverlappedState = State.Empty;
                     overlappedTexture = null;
-    
                 }
                 GameSession.GameBoard.Units[X, Y] = this;
-                
             }
 
         }
@@ -74,15 +75,27 @@ namespace Bomberman.Utlis
             if (state == State.NormalBomb)
             {
                 OverlappedState = state;
-                overlappedTexture = manager.Load<Texture2D>(ResourceInfo.Resources[state]);
+                overlappedTexture = manager.Load<Texture2D>(ResourceInfo.ImageResources[state]);
             }
+            else if (state == State.Empty)
+                UnitState = state;
             else
             {
                 UnitState = state;
-                texture = manager.Load<Texture2D>(ResourceInfo.Resources[state]);
+                texture = manager.Load<Texture2D>(ResourceInfo.ImageResources[state]);
             }
 
         }
+
+        public void ResetState()
+        {
+            OverlappedState = State.Empty;
+            overlappedTexture = null;
+            texture = null;
+            UnitState = State.Empty;
+        }
+
+        
 
         public void Draw(SpriteBatch target)
         {

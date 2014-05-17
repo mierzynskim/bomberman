@@ -10,17 +10,19 @@ namespace Bomberman.Players
     {
         public int Delay { get; set; }
 
+        public event ChangedEventHandler Changed;
         public override void Move(Direction direction)
         {
             if (Delay == 4)
             {
+                Changed(this, new EventArgs());
                 switch (direction)
                 {
                     case Direction.Down:
-                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y - 1);
+                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y + 1);
                         break;
                     case Direction.Up:
-                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y + 1);
+                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y - 1);
                         break;
                     case Direction.Left:
                         CurrentUnit.MoveTo(CurrentUnit.X - 1, CurrentUnit.Y);
@@ -31,7 +33,6 @@ namespace Bomberman.Players
                 }
             }
             Delay = (Delay + 1) % 5;
-
         }
     }
 }

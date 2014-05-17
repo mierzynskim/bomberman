@@ -61,5 +61,67 @@ namespace Bomberman.Utlis
                     break;
             }
         }
+
+        public void AddComputerPlayer(ComputerPlayer player, ContentManager manager)
+        {
+            bool isAdded = false;
+            for (var i = Height - 1; i >= 0; i--)
+            {
+                for (var j = Width - 1; j >= 0; j--)
+                {
+                    if (Units[i, j].UnitState == State.Empty)
+                    {
+                        Units[i, j].Initialize(manager, State.Enemy);
+                        Units[i, j].UnitState = State.Enemy;
+                        isAdded = true;
+                        player.CurrentUnit = Units[i, j];
+                        break;
+                    }
+                }
+                if (isAdded)
+                    break;
+            }
+        }
+
+        public IEnumerable<Unit> GetFreeNeighbors(Unit unit)
+        {
+            var neighbors = new List<Unit>();
+            if (unit.X + 1 < Width && (Units[unit.X + 1, unit.Y].UnitState == State.Empty || Units[unit.X + 1, unit.Y].UnitState == State.Player))
+                neighbors.Add(Units[unit.X + 1, unit.Y]);
+            if (unit.X - 1 > 0 && (Units[unit.X - 1, unit.Y].UnitState == State.Empty || Units[unit.X - 1, unit.Y].UnitState == State.Player))
+                neighbors.Add(Units[unit.X - 1, unit.Y]);
+            if (unit.Y + 1 < Height && (Units[unit.X, unit.Y + 1].UnitState == State.Empty || Units[unit.X, unit.Y + 1].UnitState == State.Player))
+                neighbors.Add(Units[unit.X, unit.Y + 1]);
+            if (unit.Y - 1 > 0 && (Units[unit.X, unit.Y - 1].UnitState == State.Empty || Units[unit.X, unit.Y - 1].UnitState == State.Player))
+                neighbors.Add(Units[unit.X, unit.Y - 1]);
+
+            return neighbors;
+        }
+
+        private IEnumerable<Unit> GetBombRange(Unit unit)
+        {
+            var neighbors = new List<Unit>();
+            if (unit.X + 1 < Width && Units[unit.X + 1, unit.Y].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X + 1, unit.Y] );
+            if (unit.X - 1 > 0 && Units[unit.X - 1, unit.Y].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X - 1, unit.Y]);
+            if (unit.Y + 1 < Height && Units[unit.X, unit.Y + 1].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X, unit.Y + 1]);
+            if (unit.Y - 1 > 0 && Units[unit.X, unit.Y - 1].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X, unit.Y - 1]);
+            neighbors.Add(unit);
+            return neighbors;
+        }
+
+        public void ResetNeighbors(Unit unit)
+        {
+            foreach (var neighbor in GetBombRange(unit))
+            {
+                neighbor.ResetState();
+            }
+        }
+
+
+
     }
 }

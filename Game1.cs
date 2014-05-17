@@ -1,15 +1,9 @@
 ﻿#region Using Statements
-using System;
-using System.Collections.Generic;
-using Bomberman.Commands;
-using Bomberman.Players;
+
+using Bomberman.Sounds;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.GamerServices;
+
 #endregion
 
 namespace Bomberman
@@ -32,7 +26,10 @@ namespace Bomberman
                 PreferredBackBufferWidth = windowWidth
             };
             graphics.ApplyChanges();
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = @"Content";
+
+            MonoGameAudio audio = new MonoGameAudio();
+            ServiceLocator.Provide(audio);
 
             ScreenManager screenManager = new ScreenManager(this);
 

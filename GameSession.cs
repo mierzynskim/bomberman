@@ -14,7 +14,9 @@ namespace Bomberman
 {
     public class GameSession
     {
-        private ContentManager contentManager;
+        private HumanPlayer humanPlayer;
+
+        public ContentManager Manager { get; set; }
         public int Velocity { get; set; }
         public int LivesCount { get; set; }
         public DateTime GameDuration { get; set; }
@@ -27,12 +29,23 @@ namespace Bomberman
         public static Board GameBoard { get; private set; }
         public TreasureState TreasureState { get; set; }
 
+        public HumanPlayer Player { get; set; }
+
+        public List<ComputerPlayer> ComputerPlayers { get; set; }
+
+        public HumanPlayer HumanPlayer
+        {
+            get { return humanPlayer; }
+            set { humanPlayer = value; }
+        }
+
         public GameSession(ContentManager manager)
         {
-            contentManager = manager;
+            Manager = manager;
             GameBoard = new Board(20, 20, manager);
-
         }
+
+        
 
         public void RedrawBoard(SpriteBatch target)
         {
@@ -43,28 +56,28 @@ namespace Bomberman
                 }
         }
 
-        public ICommand HandleInput(KeyboardState currentKeyboardState, GameActor actor)
+        public ICommand HandleInput(KeyboardState currentKeyboardState)
         {
             //TODO make switch
             if (currentKeyboardState.IsKeyDown(Keys.Left))
             {
-                return new MoveUnitCommand(Direction.Left, actor);
+                return new MoveUnitCommand(Direction.Left, Player);
             }
             if (currentKeyboardState.IsKeyDown(Keys.Right))
             {
-                return new MoveUnitCommand(Direction.Right, actor);
+                return new MoveUnitCommand(Direction.Right, Player);
             }
             if (currentKeyboardState.IsKeyDown(Keys.Up))
             {
-                return new MoveUnitCommand(Direction.Down, actor);
+                return new MoveUnitCommand(Direction.Up, Player);
             }
             if (currentKeyboardState.IsKeyDown(Keys.Down))
             {
-                return new MoveUnitCommand(Direction.Up, actor);
+                return new MoveUnitCommand(Direction.Down, Player);
             }
             if (currentKeyboardState.IsKeyDown(Keys.D1))
             {
-                return new PutNormalBomb(contentManager);
+                return new PutNormalBomb(Manager);
             }
             
             return null;

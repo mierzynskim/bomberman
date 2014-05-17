@@ -9,11 +9,13 @@
 
 #region Using Statements
 using System;
+using System.Collections.Generic;
 using System.Threading;
-using System.Web.UI.WebControls;
 using Bomberman;
+using Bomberman.Algorithms;
 using Bomberman.Players;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -33,7 +35,6 @@ namespace GameStateManagement
         private ContentManager content;
         private float pauseAlpha;
         private GameSession gameController;
-        private HumanPlayer player;
 
         #endregion
 
@@ -58,11 +59,16 @@ namespace GameStateManagement
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-
-            gameController = new GameSession(ScreenManager.Game.Content);
-            player = new HumanPlayer();
-            GameSession.GameBoard.AddPlayer(player, ScreenManager.Game.Content);
-
+            //TODO refactor?
+            var list = new List<ComputerPlayer> { new ComputerPlayer(new AStarAlgorithm()) };
+            gameController = new GameSession(ScreenManager.Game.Content) {HumanPlayer = new HumanPlayer(), ComputerPlayers = list};
+            
+            GameSession.GameBoard.AddPlayer(gameController.HumanPlayer, ScreenManager.Game.Content);
+            GameSession.GameBoard.AddComputerPlayer(gameController.ComputerPlayers[0], ScreenManager.Game.Content);
+            foreach (var computerPlayer in gameController.ComputerPlayers)
+            {
+                gameController.HumanPlayer.Changed += computerPlayer.PlayerChangedPosition;
+            }
 
             ScreenManager.Game.ResetElapsedTime();
         }
@@ -100,11 +106,16 @@ namespace GameStateManagement
 
             if (IsActive)
             {
-                // Apply some random jitter to make the enemy move around.
-                var command = gameController.HandleInput(Keyboard.GetState(), player);
-                player.Time = gameTime;
-                if (command != null)
-                    command.Execute(player);
+                var humanPlayerCommand = gameController.HandleInput(Keyboard.GetState());
+                gameController.HumanPlayer.Time = gameTime;
+                if (humanPlayerCommand != null)
+                    humanPlayerCommand.Execute(gameController.HumanPlayer);
+
+                foreach (var computerPlayer in gameController.ComputerPlayers)
+                {
+                    computerPlayer.MakeMove();
+                }
+
             }
         }
 
