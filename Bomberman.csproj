@@ -55,9 +55,13 @@
   <ItemGroup>
     <Compile Include="Algorithms\AStarAlgorithm.cs" />
     <Compile Include="Algorithms\IAiAlgorithm.cs" />
+    <Compile Include="Commands\FireCommand.cs" />
+    <Compile Include="Commands\GloveAction.cs" />
     <Compile Include="Commands\MoveUnitCommand.cs" />
     <Compile Include="Commands\PutNormalBomb.cs" />
-    <Compile Include="GameActor.cs" />
+    <Compile Include="Commands\RemoteBombFire.cs" />
+    <Compile Include="Commands\RollerSkatesCommand.cs" />
+    <Compile Include="Players\GameActor.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameSession.cs" />
@@ -121,6 +125,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BOM_11_S.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\endlessBombs.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\enemy.png">

@@ -8,6 +8,7 @@ namespace Bomberman
         public GameActor()
         {
             TreasureState = new TreasureState();
+            Velocity = 5;
         }
         public int Velocity { get; set; }
         public int LivesCount { get; set; }
@@ -17,6 +18,8 @@ namespace Bomberman
         public Unit CurrentUnit { get; set; }
         public TreasureState TreasureState { get; set; }
         public GameTime Time { get; set; }
+        public int Delay { get; set; }
+
         public abstract void Move(Direction direction);
     }
 

@@ -17,6 +17,7 @@ namespace Bomberman
         Glove, //random
         RollerSkates, //random
         Fire, //random
-        Exit // random
+        Exit, // random
+        //EndlessBombs // random
     }
 }

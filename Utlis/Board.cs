@@ -21,7 +21,7 @@ namespace Bomberman.Utlis
             for (var i = 0; i < Height; i++)
                 for (var j = 0; j < Width; j++)
                 {
-                    Units[i, j] = new Unit(new Vector2(33 * i, 33 * j)) {X = i, Y = j};
+                    Units[i, j] = new Unit(new Vector2(33 * i, 33 * j)) { X = i, Y = j };
                     if (i == 0 || j == 0 || (j % 2 == 0 && i % 2 == 0))
                     {
                         Units[i, j].Initialize(manager, State.Concrete);
@@ -100,32 +100,53 @@ namespace Bomberman.Utlis
             return neighbors;
         }
 
-        private IEnumerable<Unit> GetBombRange(Unit unit)
+        private IEnumerable<Unit> GetBombRange(Unit unit, int range)
         {
             var neighbors = new List<Unit>();
             if (unit.X + 1 < Width && Units[unit.X + 1, unit.Y].UnitState != State.Concrete)
-                neighbors.Add(Units[unit.X + 1, unit.Y] );
+                neighbors.Add(Units[unit.X + 1, unit.Y]);
             if (unit.X - 1 > 0 && Units[unit.X - 1, unit.Y].UnitState != State.Concrete)
                 neighbors.Add(Units[unit.X - 1, unit.Y]);
             if (unit.Y + 1 < Height && Units[unit.X, unit.Y + 1].UnitState != State.Concrete)
                 neighbors.Add(Units[unit.X, unit.Y + 1]);
             if (unit.Y - 1 > 0 && Units[unit.X, unit.Y - 1].UnitState != State.Concrete)
                 neighbors.Add(Units[unit.X, unit.Y - 1]);
+
+            if (unit.X + 2 < Width && Units[unit.X + 2, unit.Y].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X + 2, unit.Y]);
+            if (unit.X - 2 > 0 && Units[unit.X - 2, unit.Y].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X - 2, unit.Y]);
+            if (unit.Y + 2 < Height && Units[unit.X, unit.Y + 2].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X, unit.Y + 2]);
+            if (unit.Y - 2 > 0 && Units[unit.X, unit.Y - 2].UnitState != State.Concrete)
+                neighbors.Add(Units[unit.X, unit.Y - 2]);
             neighbors.Add(unit);
             return neighbors;
         }
 
-        public void ResetNeighbors(Unit unit)
+        public void ResetNeighbors(Unit unit, int range)
         {
-
-            foreach (var neighbor in GetBombRange(unit))
+            unit.ResetState();
+            foreach (var neighbor in GetBombRange(unit, range))
             {
-                int prop = rnd.Next(0, 5);
-                if (prop == 5 || prop == 4)
+                if (neighbor.UnitState == State.Wall)
+                {
+
                     neighbor.PlaceTreasure(manager);
-                else
-                    neighbor.ResetState();
+
+                }
+
             }
+        }
+
+        public bool IsPlayerAround(Unit unit)
+        {
+            foreach (var freeNeighbor in GetBombRange(unit, 1))
+            {
+                if (freeNeighbor.UnitState == State.Player)
+                    return true;
+            }
+            return false;
         }
     }
 }

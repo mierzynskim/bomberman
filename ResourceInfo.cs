@@ -19,7 +19,8 @@ namespace Bomberman
             {State.Glove, "glove.png"},
             {State.RollerSkates, "rollerskates.png"},
             {State.Fire, "fire.png"},
-            {State.Exit, "exit.png"}
+            {State.Exit, "exit.png"},
+            //{State.EndlessBombs, "endlessBombs.jpg"}
 
         };
         public static readonly Dictionary<Sound, string> SoundResources = new Dictionary<Sound, string>

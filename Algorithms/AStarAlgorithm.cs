@@ -66,11 +66,9 @@ namespace Bomberman.Algorithms
             var path = new List<Direction>();
             var list = new List<Unit>();
             var node = unit;
+            list.Add(node);
             while (node.Parent != null)
             {
-
-                //path.Add(toDirection(node.Parent, node));
-
                 node = node.Parent;
                 list.Add(node);
             }
@@ -78,6 +76,7 @@ namespace Bomberman.Algorithms
             {
                 path.Add(toDirection(list[i], list[i - 1]));
             }
+            //path.Add(toDirection(list[list.Count - 1], ));
             //list.Remove(list.Last());
             return path;
         }

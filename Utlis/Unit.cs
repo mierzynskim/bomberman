@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +20,6 @@ namespace Bomberman.Utlis
         private readonly static Random Rnd = new Random();
 
         private static bool exitVisible;
-
 
         public int X { get; set; }
         public int Y { get; set; }
@@ -98,6 +98,8 @@ namespace Bomberman.Utlis
             switch (GameSession.GameBoard.Units[x, y].UnitState)
             {
                 case State.Fire:
+                    var fireCommand = new FireCommand();
+                    fireCommand.Execute(actor);
                     actor.TreasureState.IsFlame = true;
                     break;
                 case State.Glove:
@@ -105,7 +107,14 @@ namespace Bomberman.Utlis
                     break;
                 case State.RollerSkates:
                     actor.TreasureState.IsRollerSkates = true;
+                    var command = new RollerSkatesCommand(GameSession.Manager);
+                    command.Execute(actor);
                     break;
+                //case State.EndlessBombs:
+                //    actor.TreasureState.EndlessBombs = true;
+                //    break;
+
+
             }
         }
 
@@ -119,9 +128,9 @@ namespace Bomberman.Utlis
 
         public void PlaceTreasure(ContentManager manager)
         {
-            int probability = 4;
+            const int probability = 4;
             State unitState = State.Empty;
-            switch (Rnd.Next(3))
+            switch (Rnd.Next(probability))
             {
                 case 0:
                     unitState = State.Fire;
@@ -139,6 +148,9 @@ namespace Bomberman.Utlis
                 case 3:
                     unitState = State.RollerSkates;
                     break;
+                //case 4:
+                //    unitState = State.EndlessBombs;
+                //    break;
             }
             if (unitState != State.Empty)
                 texture = manager.Load<Texture2D>(ResourceInfo.ImageResources[unitState]);
@@ -149,7 +161,7 @@ namespace Bomberman.Utlis
         public void Draw(SpriteBatch target)
         {
             if (UnitState == State.Empty) return;
-            if (OverlappedState == State.NormalBomb && UnitState != State.Player)
+            if (OverlappedState == State.NormalBomb && UnitState != State.Player && UnitState != State.Enemy)
             {
                 target.Begin();
 

@@ -16,7 +16,7 @@ namespace Bomberman
     {
         private HumanPlayer humanPlayer;
 
-        public ContentManager Manager { get; set; }
+        public static ContentManager Manager { get; set; }
         public static Board GameBoard { get; private set; }
 
         public HumanPlayer Player { get; set; }
@@ -69,6 +69,7 @@ namespace Bomberman
             {
                 return new PutNormalBomb(Manager);
             }
+
             
             return null;
         }
@@ -76,7 +77,8 @@ namespace Bomberman
         public static bool IsMoveValid(int x, int y)
         {
             return x > 0 && y > 0 && x < GameBoard.Width && y < GameBoard.Height &&
-                   GameBoard.Units[x, y].UnitState != State.Wall && GameBoard.Units[x, y].UnitState != State.Concrete;
+                   GameBoard.Units[x, y].UnitState != State.Wall && GameBoard.Units[x, y].UnitState != State.Concrete 
+                   && GameBoard.Units[x, y].UnitState != State.Enemy && GameBoard.Units[x, y].UnitState != State.Player;
 
         }
 

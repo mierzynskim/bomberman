@@ -8,12 +8,15 @@ namespace Bomberman.Players
 {
     public class HumanPlayer : GameActor
     {
-        public int Delay { get; set; }
-
+        public HumanPlayer()
+        {
+            Velocity = 5;
+            TreasureState.BombsCount = 20;
+        }
         public event ChangedEventHandler Changed;
         public override void Move(Direction direction)
         {
-            if (Delay == 4)
+            if (Delay == Velocity / 2)
             {
                 Changed(this, new EventArgs());
                 switch (direction)
@@ -32,7 +35,7 @@ namespace Bomberman.Players
                         break;
                 }
             }
-            Delay = (Delay + 1) % 5;
+            Delay = (Delay + 1) % Velocity;
         }
     }
 }

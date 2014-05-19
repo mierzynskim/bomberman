@@ -12,5 +12,6 @@ namespace Bomberman
         public bool IsFlame { get; set; }
         public bool IsRollerSkates { get; set; }
         public int GlovesCount { get; set; }
+        public bool EndlessBombs { get; set; }
     }
 }

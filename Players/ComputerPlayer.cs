@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bomberman.Algorithms;
+using Bomberman.Commands;
 using Bomberman.Utlis;
+using GameStateManagement;
 
 namespace Bomberman.Players
 {
@@ -12,16 +14,21 @@ namespace Bomberman.Players
         public ComputerPlayer(IAiAlgorithm algorithm)
         {
             Algorithm = algorithm;
+            Velocity = 10;
         }
 
-        public int Delay { get; set; }
         public IAiAlgorithm Algorithm { get; set; }
         public List<Direction> Directions { get; set; }
 
         public override void Move(Direction direction)
         {
-            if (Delay == 4)
+            if (Delay == Velocity / 2)
             {
+                if (GameSession.GameBoard.IsPlayerAround(CurrentUnit))
+                {
+                    var command = new PutNormalBomb(GameSession.Manager);
+                    command.Execute(this);
+                }
                 switch (direction)
                 {
                     case Direction.Down:
@@ -41,7 +48,7 @@ namespace Bomberman.Players
 
                 Directions.RemoveAt(Directions.Count - 1);
             }
-            Delay = (Delay + 1) % 10;
+            Delay = (Delay + 1) % Velocity;
         }
 
         public void MakeMove()
