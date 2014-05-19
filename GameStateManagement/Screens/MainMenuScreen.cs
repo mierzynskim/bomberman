@@ -28,8 +28,11 @@ namespace GameStateManagement
             : base("Main Menu")
         {
             // Create our menu entries.
-            MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
+            MenuEntry playGameMenuEntry = new MenuEntry("Start");
             MenuEntry optionsMenuEntry = new MenuEntry("Options");
+            MenuEntry highScoreMenuEntry = new MenuEntry("High Score");
+            
+            MenuEntry helpMenuEntry = new MenuEntry("Help");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
 
             // Hook up menu event handlers.
@@ -40,6 +43,8 @@ namespace GameStateManagement
             // Add entries to the menu.
             MenuEntries.Add(playGameMenuEntry);
             MenuEntries.Add(optionsMenuEntry);
+            MenuEntries.Add(highScoreMenuEntry);
+            MenuEntries.Add(helpMenuEntry);
             MenuEntries.Add(exitMenuEntry);
         }
 

@@ -33,10 +33,7 @@ namespace Bomberman.Algorithms
                 var neighbors = GameSession.GameBoard.GetFreeNeighbors(unit).ToList();
                 foreach (var neighbor in neighbors)
                 {
-                    if (neighbor.UnitState != State.Empty)
-                    {
-                        
-                    }
+
                     if (neighbor.Closed) continue;
 
                     var distance = unit.G + 1;

@@ -63,8 +63,8 @@ namespace GameStateManagement
             var list = new List<ComputerPlayer> { new ComputerPlayer(new AStarAlgorithm()) };
             gameController = new GameSession(ScreenManager.Game.Content) {HumanPlayer = new HumanPlayer(), ComputerPlayers = list};
             
-            GameSession.GameBoard.AddPlayer(gameController.HumanPlayer, ScreenManager.Game.Content);
-            GameSession.GameBoard.AddComputerPlayer(gameController.ComputerPlayers[0], ScreenManager.Game.Content);
+            GameSession.GameBoard.AddPlayer(gameController.HumanPlayer);
+            GameSession.GameBoard.AddComputerPlayer(gameController.ComputerPlayers[0]);
             foreach (var computerPlayer in gameController.ComputerPlayers)
             {
                 gameController.HumanPlayer.Changed += computerPlayer.PlayerChangedPosition;
@@ -156,7 +156,14 @@ namespace GameStateManagement
         {
             ScreenManager.GraphicsDevice.Clear(ClearOptions.Target,
                                                Color.Green, 0, 0);
-
+            ScreenManager.SpriteBatch.Begin();
+            string levelText = String.Format("Level {0}", 1);
+            Vector2 strSize = ScreenManager.Font.MeasureString(levelText);
+            Vector2 strLoc = new Vector2(1024 / 2, 768 / 2);
+            strLoc.X -= strSize.X / 2;
+            strLoc.Y -= strSize.Y / 2;
+            ScreenManager.SpriteBatch.DrawString(ScreenManager.Font, levelText, strLoc, Color.White);
+            ScreenManager.SpriteBatch.End();
             gameController.RedrawBoard(ScreenManager.SpriteBatch);
 
         }

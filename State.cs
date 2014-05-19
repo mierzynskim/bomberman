@@ -13,6 +13,10 @@ namespace Bomberman
         Player,
         NormalBomb,
         RemoteBomb,
-        Enemy
+        Enemy,
+        Glove, //random
+        RollerSkates, //random
+        Fire, //random
+        Exit // random
     }
 }

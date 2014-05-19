@@ -14,7 +14,7 @@ namespace Bomberman
     public class Game1 : Game
     {
 
-        private readonly int windowHeight = 33 * 20;
+        private readonly int windowHeight = 33 * 22;
         private readonly int windowWidth = 33 * 20;
 
         public Game1()

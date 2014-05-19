@@ -11,10 +11,12 @@ namespace Bomberman.Utlis
     public class Board
     {
         private static readonly Random rnd = new Random();
+        private ContentManager manager;
         public Board(int width, int height, ContentManager manager)
         {
             Width = width;
             Height = height;
+            this.manager = manager;
             Units = new Unit[Height, Width];
             for (var i = 0; i < Height; i++)
                 for (var j = 0; j < Width; j++)
@@ -41,7 +43,7 @@ namespace Bomberman.Utlis
         public int Height { get; set; }
         public Unit[,] Units { get; set; }
 
-        public void AddPlayer(HumanPlayer player, ContentManager manager)
+        public void AddPlayer(HumanPlayer player)
         {
             bool isAdded = false;
             for (var i = 0; i < Height; i++)
@@ -62,7 +64,7 @@ namespace Bomberman.Utlis
             }
         }
 
-        public void AddComputerPlayer(ComputerPlayer player, ContentManager manager)
+        public void AddComputerPlayer(ComputerPlayer player)
         {
             bool isAdded = false;
             for (var i = Height - 1; i >= 0; i--)
@@ -115,13 +117,15 @@ namespace Bomberman.Utlis
 
         public void ResetNeighbors(Unit unit)
         {
+
             foreach (var neighbor in GetBombRange(unit))
             {
-                neighbor.ResetState();
+                int prop = rnd.Next(0, 5);
+                if (prop == 5 || prop == 4)
+                    neighbor.PlaceTreasure(manager);
+                else
+                    neighbor.ResetState();
             }
         }
-
-
-
     }
 }

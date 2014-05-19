@@ -14,8 +14,13 @@ namespace Bomberman
             {State.Wall, "wall.png"},
             {State.Player, "player.png"},
             {State.NormalBomb, "bomb.png"},
-            {State.RemoteBomb, "bomb.png"},
-            {State.Enemy, "enemy.png"}
+            {State.Enemy, "enemy.png"},
+            {State.RemoteBomb, "removeBomb.png"},
+            {State.Glove, "glove.png"},
+            {State.RollerSkates, "rollerskates.png"},
+            {State.Fire, "fire.png"},
+            {State.Exit, "exit.png"}
+
         };
         public static readonly Dictionary<Sound, string> SoundResources = new Dictionary<Sound, string>
         {

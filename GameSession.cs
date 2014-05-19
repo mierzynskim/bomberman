@@ -17,17 +17,7 @@ namespace Bomberman
         private HumanPlayer humanPlayer;
 
         public ContentManager Manager { get; set; }
-        public int Velocity { get; set; }
-        public int LivesCount { get; set; }
-        public DateTime GameDuration { get; set; }
-        public int LevelPoints { get; set; }
-        public int CurrentLevel { get; set; }
-        public int OverallPoints { get; set; }
-        public Level DifficultyLevel { get; set; }
-        public int EnemiesLeft { get; set; }
-        public int KilledEnemies { get; set; }
         public static Board GameBoard { get; private set; }
-        public TreasureState TreasureState { get; set; }
 
         public HumanPlayer Player { get; set; }
 
@@ -89,6 +79,7 @@ namespace Bomberman
                    GameBoard.Units[x, y].UnitState != State.Wall && GameBoard.Units[x, y].UnitState != State.Concrete;
 
         }
+
 
 
     }

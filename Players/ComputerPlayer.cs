@@ -25,19 +25,20 @@ namespace Bomberman.Players
                 switch (direction)
                 {
                     case Direction.Down:
-                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y + 1);
+                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y + 1, this);
                         break;
                     case Direction.Up:
-                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y - 1);
+                        CurrentUnit.MoveTo(CurrentUnit.X, CurrentUnit.Y - 1, this);
                         break;
                     case Direction.Left:
-                        CurrentUnit.MoveTo(CurrentUnit.X - 1, CurrentUnit.Y);
+                        CurrentUnit.MoveTo(CurrentUnit.X - 1, CurrentUnit.Y, this);
 
                         break;
                     case Direction.Right:
-                        CurrentUnit.MoveTo(CurrentUnit.X + 1, CurrentUnit.Y);
+                        CurrentUnit.MoveTo(CurrentUnit.X + 1, CurrentUnit.Y, this);
                         break;
                 }
+
                 Directions.RemoveAt(Directions.Count - 1);
             }
             Delay = (Delay + 1) % 10;
