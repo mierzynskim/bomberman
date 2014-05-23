@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bomberman.Utlis
 {
+    [Serializable]
     public enum Direction
     {
         Up,

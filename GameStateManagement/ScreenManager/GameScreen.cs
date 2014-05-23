@@ -239,7 +239,7 @@ namespace GameStateManagement
                                                       bool coveredByOtherScreen)
         {
             this.otherScreenHasFocus = otherScreenHasFocus;
-
+            
             if (isExiting)
             {
                 // If the screen is going away to die, it should transition off.

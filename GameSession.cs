@@ -12,12 +12,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Bomberman
 {
+    [Serializable]
     public class GameSession
     {
         private HumanPlayer humanPlayer;
 
         public static ContentManager Manager { get; set; }
         public static Board GameBoard { get; private set; }
+
+        public int CurrentLevel { get; set; }
 
         public HumanPlayer Player { get; set; }
 
@@ -33,6 +36,11 @@ namespace Bomberman
         {
             Manager = manager;
             GameBoard = new Board(20, 20, manager);
+        }
+
+        public GameSession()
+        {
+            
         }
 
         
@@ -81,6 +89,13 @@ namespace Bomberman
                    && GameBoard.Units[x, y].UnitState != State.Enemy && GameBoard.Units[x, y].UnitState != State.Player;
 
         }
+
+        public  void GameOver()
+        {
+            
+        }
+
+
 
 
 

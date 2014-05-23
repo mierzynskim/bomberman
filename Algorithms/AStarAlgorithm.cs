@@ -7,10 +7,11 @@ using Priority_Queue;
 
 namespace Bomberman.Algorithms
 {
-    public class AStarAlgorithm: IAiAlgorithm
+    [Serializable]
+    public class AStarAlgorithm: AiAlgorithm
     {
 
-        public IEnumerable<Direction> FindPath(Unit start, Unit end)
+        public override IEnumerable<Direction> FindPath(Unit start, Unit end)
         {
             HeapPriorityQueue<Unit> openList = new HeapPriorityQueue<Unit>(GameSession.GameBoard.Height * GameSession.GameBoard.Width);
             ResetPriorities();

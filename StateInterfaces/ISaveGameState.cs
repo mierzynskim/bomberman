@@ -7,5 +7,6 @@ namespace Bomberman.StateInterfaces
 {
     public interface ISaveGameState
     {
+        void Save();
     }
 }

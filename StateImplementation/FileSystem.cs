@@ -9,12 +9,12 @@ namespace Bomberman.StateImplementation
     public abstract class FileSystem
     {
 
-        protected abstract void Login(ILogin loginType);
+        public abstract void Login(ILogin loginType);
 
-        protected abstract void LoadGame(ILoadGameState loadType);
+        public abstract void LoadGame(ILoadGameState loadType);
 
-        protected abstract void SaveGame(ISaveGameState saveType);
+        public abstract void SaveGame(ISaveGameState saveType);
 
-        protected abstract void LoadHighScores(ILoadHighScores loadScoresType);
+        public abstract void LoadHighScores(ILoadHighScores loadScoresType);
     }
 }

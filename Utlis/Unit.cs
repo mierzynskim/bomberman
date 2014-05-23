@@ -10,6 +10,7 @@ using Priority_Queue;
 
 namespace Bomberman.Utlis
 {
+    [Serializable]
     public class Unit : PriorityQueueNode
     {
         private Vector2 Position { get; set; }
@@ -77,7 +78,6 @@ namespace Bomberman.Utlis
 
         public void Initialize(ContentManager manager, State state)
         {
-
             if (state == State.NormalBomb)
             {
                 OverlappedState = state;
@@ -90,7 +90,6 @@ namespace Bomberman.Utlis
                 UnitState = state;
                 texture = manager.Load<Texture2D>(ResourceInfo.ImageResources[state]);
             }
-
         }
 
         private void IsTreasure(int x, int y, GameActor actor)
@@ -101,14 +100,17 @@ namespace Bomberman.Utlis
                     var fireCommand = new FireCommand();
                     fireCommand.Execute(actor);
                     actor.TreasureState.IsFlame = true;
+                    actor.LevelPoints += 10;
                     break;
                 case State.Glove:
                     actor.TreasureState.GlovesCount++;
+                    actor.LevelPoints += 10;
                     break;
                 case State.RollerSkates:
                     actor.TreasureState.IsRollerSkates = true;
                     var command = new RollerSkatesCommand(GameSession.Manager);
                     command.Execute(actor);
+                    actor.LevelPoints += 10;
                     break;
                 //case State.EndlessBombs:
                 //    actor.TreasureState.EndlessBombs = true;

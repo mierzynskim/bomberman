@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Bomberman.Utlis
 {
+    [Serializable]
     public class Board
     {
         private static readonly Random rnd = new Random();
@@ -111,15 +112,17 @@ namespace Bomberman.Utlis
                 neighbors.Add(Units[unit.X, unit.Y + 1]);
             if (unit.Y - 1 > 0 && Units[unit.X, unit.Y - 1].UnitState != State.Concrete)
                 neighbors.Add(Units[unit.X, unit.Y - 1]);
-
-            if (unit.X + 2 < Width && Units[unit.X + 2, unit.Y].UnitState != State.Concrete)
-                neighbors.Add(Units[unit.X + 2, unit.Y]);
-            if (unit.X - 2 > 0 && Units[unit.X - 2, unit.Y].UnitState != State.Concrete)
-                neighbors.Add(Units[unit.X - 2, unit.Y]);
-            if (unit.Y + 2 < Height && Units[unit.X, unit.Y + 2].UnitState != State.Concrete)
-                neighbors.Add(Units[unit.X, unit.Y + 2]);
-            if (unit.Y - 2 > 0 && Units[unit.X, unit.Y - 2].UnitState != State.Concrete)
-                neighbors.Add(Units[unit.X, unit.Y - 2]);
+            if (range == 2)
+            {
+                if (unit.X + 2 < Width && Units[unit.X + 2, unit.Y].UnitState != State.Concrete)
+                    neighbors.Add(Units[unit.X + 2, unit.Y]);
+                if (unit.X - 2 > 0 && Units[unit.X - 2, unit.Y].UnitState != State.Concrete)
+                    neighbors.Add(Units[unit.X - 2, unit.Y]);
+                if (unit.Y + 2 < Height && Units[unit.X, unit.Y + 2].UnitState != State.Concrete)
+                    neighbors.Add(Units[unit.X, unit.Y + 2]);
+                if (unit.Y - 2 > 0 && Units[unit.X, unit.Y - 2].UnitState != State.Concrete)
+                    neighbors.Add(Units[unit.X, unit.Y - 2]);
+            }
             neighbors.Add(unit);
             return neighbors;
         }
@@ -133,11 +136,15 @@ namespace Bomberman.Utlis
                 {
 
                     neighbor.PlaceTreasure(manager);
-
+                }
+                if (neighbor.UnitState == State.Player)
+                {
+                    neighbor.ResetState();
                 }
 
             }
         }
+
 
         public bool IsPlayerAround(Unit unit)
         {

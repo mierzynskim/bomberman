@@ -8,28 +8,29 @@ namespace Bomberman.StateImplementation
 {
     public class MonoGameFileSystem: FileSystem
     {
-        private static readonly MonoGameFileSystem instance;
+        private static MonoGameFileSystem instance;
 
         public static MonoGameFileSystem Instance
         {
-            get { return instance; }
+            get { return instance ?? (instance = new MonoGameFileSystem()); }
         }
-        protected override void Login(ILogin loginType)
+
+        public override void Login(ILogin loginType)
         {
             throw new NotImplementedException();
         }
 
-        protected override void LoadGame(ILoadGameState loadType)
+        public override void LoadGame(ILoadGameState loadType)
         {
-            throw new NotImplementedException();
+            loadType.LoadGameState();
         }
 
-        protected override void SaveGame(ISaveGameState saveType)
+        public override void SaveGame(ISaveGameState saveType)
         {
-            throw new NotImplementedException();
+            saveType.Save();
         }
 
-        protected override void LoadHighScores(ILoadHighScores loadScoresType)
+        public override void LoadHighScores(ILoadHighScores loadScoresType)
         {
             throw new NotImplementedException();
         }

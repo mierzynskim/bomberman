@@ -9,16 +9,23 @@ using GameStateManagement;
 
 namespace Bomberman.Players
 {
+    [Serializable]
     public class ComputerPlayer: GameActor
     {
-        public ComputerPlayer(IAiAlgorithm algorithm)
+        public ComputerPlayer(AiAlgorithm algorithm)
         {
-            Algorithm = algorithm;
+            this.algorithm = algorithm;
             Velocity = 10;
         }
 
-        public IAiAlgorithm Algorithm { get; set; }
+        public ComputerPlayer()
+        {
+            
+        }
+
+        private readonly AiAlgorithm algorithm;
         public List<Direction> Directions { get; set; }
+
 
         public override void Move(Direction direction)
         {
@@ -62,7 +69,7 @@ namespace Bomberman.Players
             HumanPlayer player = sender as HumanPlayer;
             if (player != null)
             {
-                var directions = Algorithm.FindPath(CurrentUnit, player.CurrentUnit);
+                var directions = algorithm.FindPath(CurrentUnit, player.CurrentUnit);
                 if (directions != null)
                     Directions = directions.ToList();
             }

@@ -54,7 +54,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Algorithms\AStarAlgorithm.cs" />
-    <Compile Include="Algorithms\IAiAlgorithm.cs" />
+    <Compile Include="Algorithms\AiAlgorithm.cs" />
+    <Compile Include="Algorithms\RandomMove.cs" />
     <Compile Include="Commands\FireCommand.cs" />
     <Compile Include="Commands\GloveAction.cs" />
     <Compile Include="Commands\MoveUnitCommand.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="StateImplementation\FileSystem.cs" />
     <Compile Include="StateImplementation\LoadGame.cs" />
     <Compile Include="StateImplementation\MonoGameFileSystem.cs" />
+    <Compile Include="StateImplementation\SaveGame.cs" />
     <Compile Include="StateInterfaces\ILoadGameState.cs" />
     <Compile Include="StateInterfaces\ILoadHighScores.cs" />
     <Compile Include="StateInterfaces\ILogin.cs" />

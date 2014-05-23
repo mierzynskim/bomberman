@@ -14,16 +14,21 @@ namespace Bomberman
     public class Game1 : Game
     {
 
-        private readonly int windowHeight = 33 * 22;
-        private readonly int windowWidth = 33 * 20;
+
+        public static int WindowHeight { get; set; }
+        public static int WindowWidth { get; set; }
+
 
         public Game1()
             : base()
         {
+            
+            WindowHeight = 33 * 22;
+            WindowWidth = 33 * 20;
             GraphicsDeviceManager graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferHeight = windowHeight,
-                PreferredBackBufferWidth = windowWidth
+                PreferredBackBufferHeight = WindowHeight,
+                PreferredBackBufferWidth = WindowWidth
             };
             graphics.ApplyChanges();
             Content.RootDirectory = @"Content";
