@@ -26,6 +26,8 @@ namespace Bomberman.Players
         public AiAlgorithm algorithm { get; set; }
         public List<Direction> Directions { get; set; }
 
+        public event EventHandler<PlayerIndexEventArgs> Killed;
+
 
         public override void Move(Direction direction)
         {

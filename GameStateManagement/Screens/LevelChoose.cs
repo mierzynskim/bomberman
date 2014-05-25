@@ -5,6 +5,9 @@
 #region Using Statements
 
 using System;
+using Bomberman.Sounds;
+using Bomberman.StateImplementation;
+using Bomberman.Utlis;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
@@ -48,6 +51,7 @@ namespace Bomberman.GameStateManagement.Screens
 
         private void EasyLevelOnSelected(object sender, PlayerIndexEventArgs e)
         {
+            MonoGameFileSystem.Instance.CurrentPlayerSettings.Level = Level.Easy;
             ScreenManager.AddScreen(new EasyLevelsUnlocked(), e.PlayerIndex);
         }
         private void MediumLevelOnSelected(object sender, PlayerIndexEventArgs e)

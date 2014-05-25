@@ -15,6 +15,7 @@ using Bomberman;
 using Bomberman.Algorithms;
 using Bomberman.Players;
 using Bomberman.StateImplementation;
+using Bomberman.Utlis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -42,7 +43,7 @@ namespace GameStateManagement
 
 
 
-
+        private double prevSeconds;
         private static bool isPaused;
 
         private double seconds;
@@ -150,6 +151,7 @@ namespace GameStateManagement
                 {
                     computerPlayer.MakeMove();
                 }
+                gameController.CheckForKilled();
 
             }
         }
@@ -191,11 +193,20 @@ namespace GameStateManagement
         public override void Draw(GameTime gameTime)
         {
             if (!IsPaused)
+            {
                 seconds += gameTime.ElapsedGameTime.TotalSeconds;
+                if ((int) seconds - (int) prevSeconds == 1)
+                    gameController.HumanPlayer.LevelPoints -=
+                        LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level]
+                            .DurationPenalty;
+                
+                prevSeconds = seconds;
+                gameController.HumanPlayer.LevelPoints = Math.Abs(gameController.HumanPlayer.LevelPoints);
+            }
             ScreenManager.GraphicsDevice.Clear(ClearOptions.Target,
                 Color.Green, 0, 0);
             ScreenManager.SpriteBatch.Begin();
-            string levelText = String.Format("Level {0}", 1);
+            string levelText = String.Format("Level {0}", MonoGameFileSystem.Instance.CurrentPlayerSettings.Stage);
 
             string timerText = String.Format("Time: {0}", (int)seconds);
 

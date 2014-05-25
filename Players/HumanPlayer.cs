@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.StateImplementation;
 using Bomberman.Utlis;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
@@ -14,7 +15,7 @@ namespace Bomberman.Players
         public HumanPlayer()
         {
             Velocity = 5;
-            TreasureState.BombsCount = 20;
+            TreasureState.BombsCount = LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].BombsStart;
             TreasureState.RemoteBombsCount = 20;
             TreasureState.GlovesCount = 20;
 

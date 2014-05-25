@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.Players;
 using Bomberman.Utlis;
 using Microsoft.Xna.Framework;
 

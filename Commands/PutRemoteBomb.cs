@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Bomberman.Players;
 using Bomberman.Sounds;
 using Bomberman.Utlis;
 using Microsoft.Xna.Framework.Content;

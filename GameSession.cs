@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using Bomberman.Commands;
 using Bomberman.Players;
+using Bomberman.StateImplementation;
 using Bomberman.Utlis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -104,6 +105,18 @@ namespace Bomberman
                    GameBoard.Units[x, y].UnitState != State.Wall && GameBoard.Units[x, y].UnitState != State.Concrete
                    && GameBoard.Units[x, y].UnitState != State.Enemy && GameBoard.Units[x, y].UnitState != State.Player;
 
+        }
+
+        public void CheckForKilled()
+        {
+            for (int i = 0; i < ComputerPlayers.Count; i++)
+            {
+                if (ComputerPlayers[i].CurrentUnit.UnitState == State.Empty)
+                {
+                    HumanPlayer.LevelPoints += LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].EnemyKilledPoints;
+                    ComputerPlayers.RemoveAt(i);
+                }
+            }
         }
     }
 }

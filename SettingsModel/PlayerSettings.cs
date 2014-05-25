@@ -16,5 +16,7 @@ namespace Bomberman.SettingsModel
         public int MediumLevelsUnlocked { get; set; }
         public int HardLevelsUnlocked { get; set; }
 
+        public int Stage { get; set; }
+
     }
 }

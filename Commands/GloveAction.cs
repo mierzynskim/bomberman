@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.Players;
 using Bomberman.Utlis;
 using Microsoft.Xna.Framework.Content;
 
@@ -29,55 +30,57 @@ namespace Bomberman.Commands
                     case Direction.Up:
                         while (true)
                         {
-                            var newUnit = GameSession.GameBoard.Units[x, (y - 1) % GameSession.GameBoard.Height];
+                            y = (y - 1)%GameSession.GameBoard.Height;
+                            if (y < 0)
+                                y = GameSession.GameBoard.Height - 1;
+                            var newUnit = GameSession.GameBoard.Units[x, y];
                             if (newUnit.UnitState == State.Empty)
                             {
                                 var command = new PutNormalBomb(manager, newUnit.X, newUnit.Y, true);
                                 command.Execute(actor);
                                 break;
                             }
-                            y--;
                         }
                         break;
                     case Direction.Down:
                         while (true)
                         {
-                            var newUnit = GameSession.GameBoard.Units[x, (y + 1) % GameSession.GameBoard.Height];
+                            y = (y + 1) % GameSession.GameBoard.Height > 0 ? (y + 1) % GameSession.GameBoard.Height : 0;
+                            var newUnit = GameSession.GameBoard.Units[x, y];
                             if (newUnit.UnitState == State.Empty)
                             {
                                 var command = new PutNormalBomb(manager, newUnit.X, newUnit.Y, true);
                                 command.Execute(actor);
                                 break;
                             }
-                            y++;
                         }
                         break;
                     case Direction.Left:
                         while (true)
                         {
-                            var newUnit = GameSession.GameBoard.Units[(x - 1) % GameSession.GameBoard.Width, y];
-                            if (newUnit.UnitState ==
-                                State.Empty)
+                            x = (x - 1) % GameSession.GameBoard.Width;
+                            if (x < 0)
+                                x = GameSession.GameBoard.Width - 1;
+                            var newUnit = GameSession.GameBoard.Units[x, y];
+                            if (newUnit.UnitState == State.Empty)
                             {
                                 var command = new PutNormalBomb(manager, newUnit.X, newUnit.Y, true);
                                 command.Execute(actor);
                                 break;
                             }
-                            x--;
                         }
                         break;
                     case Direction.Right:
                         while (true)
                         {
-                            var newUnit = GameSession.GameBoard.Units[(x + 1) % GameSession.GameBoard.Width, y];
-                            if (newUnit.UnitState ==
-                                State.Empty)
+                            x = (x + 1) % GameSession.GameBoard.Width > 0 ? (x + 1) % GameSession.GameBoard.Width : 0;
+                            var newUnit = GameSession.GameBoard.Units[x, y];
+                            if (newUnit.UnitState == State.Empty)
                             {
                                 var command = new PutNormalBomb(manager,newUnit.X, newUnit.Y, true);
                                 command.Execute(actor);
                                 break;
                             }
-                            x++;
                         }
                         break;
                 }

@@ -64,6 +64,8 @@
     <Compile Include="Commands\PutRemoteBomb.cs" />
     <Compile Include="Commands\RemoteBombFire.cs" />
     <Compile Include="Commands\RollerSkatesCommand.cs" />
+    <Compile Include="Utlis\LevelInfo.cs" />
+    <Compile Include="Utlis\LevelProperties.cs" />
     <Compile Include="GameStateManagement\Screens\EasyLevelsUnlocked.cs" />
     <Compile Include="GameStateManagement\Screens\InputNewPlayer.cs" />
     <Compile Include="GameStateManagement\Screens\LevelChoose.cs" />
@@ -95,7 +97,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsModel\GameStorage.cs" />
     <Compile Include="SettingsModel\HighScore.cs" />
-    <Compile Include="SettingsModel\LevelInfo.cs" />
     <Compile Include="SettingsModel\PlayerSettings.cs" />
     <Compile Include="StateImplementation\LoadGameStorage.cs" />
     <Compile Include="StateImplementation\SaveGameStorage.cs" />

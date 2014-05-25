@@ -1,8 +1,7 @@
 ﻿using System;
 using Bomberman.Utlis;
-using Microsoft.Xna.Framework;
 
-namespace Bomberman
+namespace Bomberman.Players
 {
     [Serializable]
     public abstract class GameActor
@@ -14,14 +13,26 @@ namespace Bomberman
             TreasureState.BombsCount = 20;
         }
         public int Velocity { get; set; }
-        public int LivesCount { get; set; }
-        public int LevelPoints { get; set; }
-        
+
+        private int levelPoints;
+        public int LevelPoints
+        {
+            get { return levelPoints; }
+            set
+            {
+                levelPoints = value;
+                if (levelPoints < 0)
+                    levelPoints = 0;
+            }
+        }
+
         public int OverallPoints { get; set; }
         public Unit CurrentUnit { get; set; }
         public TreasureState TreasureState { get; set; }
 
         public int Delay { get; set; }
+
+
 
         public abstract void Move(Direction direction);
     }

@@ -5,6 +5,8 @@ using System.Management.Instrumentation;
 using System.Runtime.Serialization;
 using System.Text;
 using Bomberman.Commands;
+using Bomberman.Players;
+using Bomberman.StateImplementation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,7 +51,7 @@ namespace Bomberman.Utlis
         public void MoveTo(int x, int y, GameActor actor)
         {
             //TODO make transparent overlapping sprites
-            if (GameSession.IsMoveValid(x, y))
+            if (GameSession.IsMoveValid(x, y) && actor.CurrentUnit.UnitState != State.Empty)
             {
                 IsTreasure(x, y, actor);
                 GameSession.GameBoard.Units[X, Y] = Clone();
@@ -103,17 +105,17 @@ namespace Bomberman.Utlis
                     var fireCommand = new FireCommand();
                     fireCommand.Execute(actor);
                     actor.TreasureState.IsFlame = true;
-                    actor.LevelPoints += 10;
+                    actor.LevelPoints += LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].TreasureFoundPoints;
                     break;
                 case State.Glove:
                     actor.TreasureState.GlovesCount++;
-                    actor.LevelPoints += 10;
+                    actor.LevelPoints += LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].TreasureFoundPoints;
                     break;
                 case State.RollerSkates:
                     actor.TreasureState.IsRollerSkates = true;
                     var command = new RollerSkatesCommand(GameSession.Manager);
                     command.Execute(actor);
-                    actor.LevelPoints += 10;
+                    actor.LevelPoints += LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].TreasureFoundPoints;
                     break;
                 //case State.EndlessBombs:
                 //    actor.TreasureState.EndlessBombs = true;
