@@ -15,7 +15,9 @@ namespace Bomberman.Players
         {
             Velocity = 5;
             TreasureState.BombsCount = 20;
-            
+            TreasureState.RemoteBombsCount = 20;
+            TreasureState.GlovesCount = 20;
+
         }
 
         public event ChangedEventHandler Changed;

@@ -23,7 +23,7 @@ namespace Bomberman.Players
             
         }
 
-        private readonly AiAlgorithm algorithm;
+        public AiAlgorithm algorithm { get; set; }
         public List<Direction> Directions { get; set; }
 
 
@@ -31,9 +31,10 @@ namespace Bomberman.Players
         {
             if (Delay == Velocity / 2)
             {
+
                 if (GameSession.GameBoard.IsPlayerAround(CurrentUnit))
                 {
-                    var command = new PutNormalBomb(GameSession.Manager);
+                    var command = new PutNormalBomb(GameSession.Manager, CurrentUnit.X, CurrentUnit.Y, false);
                     command.Execute(this);
                 }
                 switch (direction)

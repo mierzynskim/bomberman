@@ -1,5 +1,8 @@
-﻿namespace Priority_Queue
+﻿using System;
+
+namespace Priority_Queue
 {
+    [Serializable]
     public class PriorityQueueNode
     {
         /// <summary>

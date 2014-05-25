@@ -12,7 +12,7 @@ namespace Bomberman.Sounds
         public override void PlaySound(Sound sound)
         {
             //TODO fix sound
-            //soundEffect = GameSession.Manager.Load<SoundEffect>(ResourceInfo.SoundResources[sound]);
+            //soundEffect = GameSession.Manager.Load<SoundEffect>("killed.wav");
             //soundEffect.Play();
         }
 

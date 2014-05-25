@@ -17,27 +17,27 @@ namespace Bomberman.Commands
         private const int DelayTime = 5;
         private int x;
         private int y;
+        private readonly bool inst;
 
-        public PutNormalBomb(ContentManager manager)
+        public PutNormalBomb(ContentManager manager, int x, int y, bool inst)
         {
             this.manager = manager;
+            this.inst = inst;
+            this.x = x;
+            this.y = y;
         }
         public void Execute(GameActor actor)
         {
-            if (actor.TreasureState.BombsCount > 0 && delay == 4)
+            if (actor.TreasureState.BombsCount > 0 && (delay == 4 || inst))
             {
-                x = actor.CurrentUnit.X;
-                y = actor.CurrentUnit.Y;
-                actor.CurrentUnit.Initialize(manager, State.NormalBomb);
+                GameSession.GameBoard.Units[x, y].Initialize(manager, State.NormalBomb, !inst);
                 isTimerOn = true;
                 var thread = new Thread(() =>
                 {
                     Thread.Sleep(DelayTime * 1000);
                     isTimerOn = false;
-                    GameSession.GameBoard.ResetNeighbors(GameSession.GameBoard.Units[x, y], actor.TreasureState.IsFlame ? 2 : 1);
-
-                    ServiceLocator.AudioSerivce.PlaySound(Sound.Explosion);
-                    actor.TreasureState.BombsCount--;
+                    var fireCommand = new NormalBombFire(manager, x, y);
+                    fireCommand.Execute(actor);
                     Thread.CurrentThread.Abort();
                 });
                 thread.Start();   

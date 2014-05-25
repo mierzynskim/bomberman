@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web.UI;
 using System.Xml.Serialization;
+using Bomberman.SettingsModel;
 using Bomberman.StateInterfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 
 namespace Bomberman.StateImplementation
 {
-    public class LoadGame : ILoadGameState
+    public class LoadGameStorage: ILoadGameStorage
     {
-        private readonly GameSession session;
+
+        private readonly GameStorage storage;
         private StorageDevice device;
         private const string containerName = "MyGamesStorage";
-        private const string filename = "mysave.sav";
+        private const string filename = "gameStorage.sav";
         private StorageContainer container;
 
-        public object LoadGameState<T>()
+        public GameStorage Load()
         {
             if (!Guide.IsVisible)
             {
@@ -30,7 +30,10 @@ namespace Bomberman.StateImplementation
                 result.AsyncWaitHandle.WaitOne();
                 LoadFromDevice(result);
                 result.AsyncWaitHandle.Close();
-                return (T)Serialize<T>(container);
+                var resultSerialized = Deserialize(container);
+                if (resultSerialized == null)
+                    return new GameStorage();
+                return resultSerialized;
             }
             return null;
         }
@@ -44,13 +47,13 @@ namespace Bomberman.StateImplementation
             result.AsyncWaitHandle.Close();
         }
 
-        private static object Serialize<T>(StorageContainer container)
+        private static GameStorage Deserialize(StorageContainer container)
         {
             if (container.FileExists(filename))
             {
                 Stream stream = container.OpenFile(filename, FileMode.Open);
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-                var result = (T)serializer.Deserialize(stream);
+                XmlSerializer serializer = new XmlSerializer(typeof(GameStorage));
+                var result = (GameStorage)serializer.Deserialize(stream);
                 stream.Close();
                 container.Dispose();
                 return result;

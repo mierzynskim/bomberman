@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Instrumentation;
+using System.Runtime.Serialization;
 using System.Text;
 using Bomberman.Players;
 using Microsoft.Xna.Framework;
@@ -12,7 +14,18 @@ namespace Bomberman.Utlis
     public class Board
     {
         private static readonly Random rnd = new Random();
+        [NonSerialized]
         private ContentManager manager;
+
+        public Board()
+        {
+
+        }
+
+        internal void OnSerializedMethod(StreamingContext context)
+        {
+            manager = null;
+        }
         public Board(int width, int height, ContentManager manager)
         {
             Width = width;
@@ -138,6 +151,10 @@ namespace Bomberman.Utlis
                     neighbor.PlaceTreasure(manager);
                 }
                 if (neighbor.UnitState == State.Player)
+                {
+                    neighbor.ResetState();
+                }
+                if (neighbor.UnitState == State.Enemy)
                 {
                     neighbor.ResetState();
                 }

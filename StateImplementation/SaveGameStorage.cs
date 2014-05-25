@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web.UI;
 using System.Xml.Serialization;
+using Bomberman.SettingsModel;
 using Bomberman.StateInterfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 
 namespace Bomberman.StateImplementation
 {
-    public class LoadGame : ILoadGameState
+    public class SaveGameStorage : ISaveGameStorage
     {
-        private readonly GameSession session;
         private StorageDevice device;
-        private const string containerName = "MyGamesStorage";
-        private const string filename = "mysave.sav";
+        private const string ContainerName = "MyGamesStorage";
+        private const string Filename = "gameStorage.sav";
         private StorageContainer container;
 
-        public object LoadGameState<T>()
+
+        public void Save(GameStorage gameStorage)
         {
             if (!Guide.IsVisible)
             {
@@ -30,32 +29,32 @@ namespace Bomberman.StateImplementation
                 result.AsyncWaitHandle.WaitOne();
                 LoadFromDevice(result);
                 result.AsyncWaitHandle.Close();
-                return (T)Serialize<T>(container);
+                Serialize(container, gameStorage);
             }
-            return null;
         }
 
         void LoadFromDevice(IAsyncResult result)
         {
             device = StorageDevice.EndShowSelector(result);
-            IAsyncResult r = device.BeginOpenContainer(containerName, null, null);
+            IAsyncResult r = device.BeginOpenContainer(ContainerName, null, null);
             result.AsyncWaitHandle.WaitOne();
             container = device.EndOpenContainer(r);
             result.AsyncWaitHandle.Close();
         }
 
-        private static object Serialize<T>(StorageContainer container)
+        private static void Serialize(StorageContainer container, GameStorage gameStorage)
         {
-            if (container.FileExists(filename))
-            {
-                Stream stream = container.OpenFile(filename, FileMode.Open);
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-                var result = (T)serializer.Deserialize(stream);
-                stream.Close();
-                container.Dispose();
-                return result;
-            }
-            return null;
+            if (container.FileExists(Filename))
+                container.DeleteFile(Filename);
+            Stream stream = container.CreateFile(Filename);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(GameStorage));
+            serializer.Serialize(stream, gameStorage);
+            stream.Close();
+            container.Dispose();
+
+
         }
+
     }
 }

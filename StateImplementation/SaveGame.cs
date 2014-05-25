@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml.Serialization;
 using Bomberman.StateInterfaces;
@@ -47,8 +48,12 @@ namespace Bomberman.StateImplementation
                 if (container.FileExists(filename))
                     container.DeleteFile(filename);
                 Stream stream = container.CreateFile(filename);
-                XmlSerializer serializer = new XmlSerializer(typeof(GameSession));
-                serializer.Serialize(stream, session);
+
+                BinaryFormatter formatter = new BinaryFormatter();
+                
+                formatter.Serialize(stream, session);
+
+
                 stream.Close();
                 container.Dispose();
                 result.AsyncWaitHandle.Close();

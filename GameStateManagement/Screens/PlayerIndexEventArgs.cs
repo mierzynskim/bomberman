@@ -37,6 +37,8 @@ namespace GameStateManagement
             get { return playerIndex; }
         }
 
+        public string PlayerName { get; set; }
+
         PlayerIndex playerIndex;
     }
 }

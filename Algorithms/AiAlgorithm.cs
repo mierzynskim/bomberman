@@ -5,7 +5,6 @@ using Bomberman.Utlis;
 
 namespace Bomberman.Algorithms
 {
-    [Serializable]
     [XmlInclude(typeof(RandomMove)), XmlInclude(typeof (AStarAlgorithm))]
     public abstract class AiAlgorithm
     {

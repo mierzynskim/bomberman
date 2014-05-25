@@ -8,6 +8,8 @@
 #endregion
 
 #region Using Statements
+
+using Bomberman.GameStateManagement.Screens;
 using Microsoft.Xna.Framework;
 #endregion
 
@@ -59,8 +61,8 @@ namespace GameStateManagement
         /// </summary>
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen());
+            
+            ScreenManager.AddScreen(new LevelChoose(), e.PlayerIndex);
         }
 
 

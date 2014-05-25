@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 
+using Bomberman.GameStateManagement.Screens;
 using Bomberman.Sounds;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
@@ -18,6 +19,8 @@ namespace Bomberman
         public static int WindowHeight { get; set; }
         public static int WindowWidth { get; set; }
 
+        public static GraphicsDeviceManager Graphics { get; set; }
+
 
         public Game1()
             : base()
@@ -25,12 +28,13 @@ namespace Bomberman
             
             WindowHeight = 33 * 22;
             WindowWidth = 33 * 20;
-            GraphicsDeviceManager graphics = new GraphicsDeviceManager(this)
+            Graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferHeight = WindowHeight,
                 PreferredBackBufferWidth = WindowWidth
             };
-            graphics.ApplyChanges();
+
+            Graphics.ApplyChanges();
             Content.RootDirectory = @"Content";
 
             MonoGameAudio audio = new MonoGameAudio();
@@ -41,7 +45,7 @@ namespace Bomberman
             Components.Add(screenManager);
 
             screenManager.AddScreen(new BackgroundScreen(), null);
-            screenManager.AddScreen(new MainMenuScreen(), null);
+            screenManager.AddScreen(new LoginScreen(), null);
         }
 
         /// <summary>

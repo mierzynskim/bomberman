@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.SettingsModel;
 
 namespace Bomberman.StateInterfaces
 {
-    public interface ILoadGameState
+    public interface ISaveGameStorage
     {
-        object LoadGameState<T>();
+        void Save(GameStorage gameStorage);
     }
 }

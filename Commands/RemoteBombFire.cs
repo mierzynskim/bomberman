@@ -11,24 +11,26 @@ namespace Bomberman.Commands
         private ContentManager manager;
         private int x;
         private int y;
+
+        public RemoteBombFire(ContentManager manager)
+        {
+            this.manager = manager;
+        }
         public void Execute(GameActor actor)
         {
             if (actor.TreasureState.RemoteBombsCount > 0)
             {
                 x = actor.CurrentUnit.X;
                 y = actor.CurrentUnit.Y;
-                actor.CurrentUnit.Initialize(manager, State.NormalBomb);
+                if (PutRemoteBomb.RemoteBombUnits.Count > 0)
+                {
+                    var remotePosition = PutRemoteBomb.RemoteBombUnits.Last();
+                    GameSession.GameBoard.Units[remotePosition.Item1, remotePosition.Item2].Initialize(manager, State.NormalBomb, true);
+                    GameSession.GameBoard.ResetNeighbors(GameSession.GameBoard.Units[remotePosition.Item1, remotePosition.Item2], actor.TreasureState.IsFlame ? 2 : 1);
+                    PutRemoteBomb.RemoteBombUnits.RemoveAt(PutRemoteBomb.RemoteBombUnits.Count - 1);
+                }
+
                 
-                //var thread = new Thread(() =>
-                //{
-                //    Thread.Sleep(DelayTime * 1000);
-                //    isTimerOn = false;
-                //    GameSession.GameBoard.ResetNeighbors(GameSession.GameBoard.Units[x, y]);
-                //    ServiceLocator.AudioSerivce.PlaySound(Sound.Explosion);
-                //    actor.TreasureState.BombsCount--;
-                //    Thread.CurrentThread.Abort();
-                //});
-                //thread.Start(); 
             }
         }
     }

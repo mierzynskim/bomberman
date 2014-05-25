@@ -11,8 +11,13 @@ namespace Bomberman.Commands
         private const int DelayTime = 10;
         public void Execute(GameActor actor)
         {
-            Thread.Sleep(DelayTime * 1000);
-            actor.TreasureState.IsFlame = false;
+            var thread = new Thread(() =>
+            {
+                Thread.Sleep(DelayTime * 1000);
+                actor.TreasureState.IsFlame = false;
+            });
+            thread.Start();
+
         }
     }
 }

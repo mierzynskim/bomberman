@@ -35,6 +35,7 @@ namespace GameStateManagement
     /// want to quit" message box, and the main game itself are all implemented
     /// as screens.
     /// </summary>
+    [Serializable]
     public abstract class GameScreen
     {
         #region Properties

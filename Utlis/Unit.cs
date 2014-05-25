@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Instrumentation;
+using System.Runtime.Serialization;
 using System.Text;
 using Bomberman.Commands;
 using Microsoft.Xna.Framework;
@@ -42,7 +44,8 @@ namespace Bomberman.Utlis
 
         }
 
-        //TODO remove actor dependency?
+
+
         public void MoveTo(int x, int y, GameActor actor)
         {
             //TODO make transparent overlapping sprites
@@ -76,9 +79,9 @@ namespace Bomberman.Utlis
             return unit;
         }
 
-        public void Initialize(ContentManager manager, State state)
+        public void Initialize(ContentManager manager, State state, bool actorOn = true)
         {
-            if (state == State.NormalBomb)
+            if (state == State.NormalBomb && actorOn)
             {
                 OverlappedState = state;
                 overlappedTexture = manager.Load<Texture2D>(ResourceInfo.ImageResources[state]);

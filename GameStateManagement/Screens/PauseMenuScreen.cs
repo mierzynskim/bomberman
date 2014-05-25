@@ -59,6 +59,7 @@ namespace GameStateManagement
             confirmQuitMessageBox.Accepted += ConfirmQuitMessageBoxAccepted;
 
             ScreenManager.AddScreen(confirmQuitMessageBox, ControllingPlayer);
+            
         }
 
 
@@ -69,6 +70,7 @@ namespace GameStateManagement
         /// </summary>
         void ConfirmQuitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
         {
+            GameplayScreen.IsPaused = false;
             LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
                                                            new MainMenuScreen());
         }

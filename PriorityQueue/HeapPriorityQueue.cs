@@ -10,6 +10,7 @@ namespace Priority_Queue
     /// See https://bitbucket.org/BlueRaja/high-speed-priority-queue-for-c/wiki/Getting%20Started for more information
     /// </summary>
     /// <typeparam name="T">The values in the queue.  Must implement the PriorityQueueNode interface</typeparam>
+    
     public sealed class HeapPriorityQueue<T> : IPriorityQueue<T>
         where T : PriorityQueueNode
     {

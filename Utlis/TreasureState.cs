@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bomberman
 {
+    [Serializable]
     public class TreasureState
     {
         public int BombsCount { get; set; }

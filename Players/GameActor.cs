@@ -20,7 +20,7 @@ namespace Bomberman
         public int OverallPoints { get; set; }
         public Unit CurrentUnit { get; set; }
         public TreasureState TreasureState { get; set; }
-        public GameTime Time { get; set; }
+
         public int Delay { get; set; }
 
         public abstract void Move(Direction direction);
