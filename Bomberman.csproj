@@ -11,7 +11,8 @@
     <RootNamespace>Bomberman</RootNamespace>
     <AssemblyName>Bomberman</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>c:\deploy\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -21,10 +22,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -45,12 +46,25 @@
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Windows\Release\Bomberman.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Bomberman.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>015E967FFA2F44341D29C2803C97FD3F4D8BC5BF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Bomberman_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Algorithms\AStarAlgorithm.cs" />
@@ -64,9 +78,10 @@
     <Compile Include="Commands\PutRemoteBomb.cs" />
     <Compile Include="Commands\RemoteBombFire.cs" />
     <Compile Include="Commands\RollerSkatesCommand.cs" />
+    <Compile Include="GameStateManagement\Screens\HighScoresScreen.cs" />
     <Compile Include="Utlis\LevelInfo.cs" />
     <Compile Include="Utlis\LevelProperties.cs" />
-    <Compile Include="GameStateManagement\Screens\EasyLevelsUnlocked.cs" />
+    <Compile Include="GameStateManagement\Screens\LevelsUnlocked.cs" />
     <Compile Include="GameStateManagement\Screens\InputNewPlayer.cs" />
     <Compile Include="GameStateManagement\Screens\LevelChoose.cs" />
     <Compile Include="GameStateManagement\Screens\LoginList.cs" />
@@ -111,12 +126,8 @@
     <Compile Include="StateImplementation\FileSystem.cs" />
     <Compile Include="StateImplementation\LoadGame.cs" />
     <Compile Include="StateImplementation\MonoGameFileSystem.cs" />
-    <Compile Include="StateImplementation\SaveGame.cs" />
     <Compile Include="StateInterfaces\ILoadGameState.cs" />
-    <Compile Include="StateInterfaces\ILoadHighScores.cs" />
-    <Compile Include="StateInterfaces\ILogin.cs" />
     <Compile Include="StateInterfaces\ISaveGameState.cs" />
-    <Compile Include="StateInterfaces\ISaveScores.cs" />
     <Compile Include="Utlis\TreasureState.cs" />
     <Compile Include="Utlis\Board.cs" />
     <Compile Include="Utlis\ChangedDelegate.cs" />
@@ -139,7 +150,7 @@
     <Content Include="Content\blank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\bomb.png">
+    <Content Include="Content\newRemoteBomb.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BOM_11_S.wav">
@@ -172,7 +183,7 @@
     <Content Include="Content\concrete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\remoteBomb.PNG">
+    <Content Include="Content\bomb.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\rollerskates.PNG">
@@ -184,27 +195,28 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\background.xnb">
+    <None Include="Bomberman_TemporaryKey.pfx" />
+    <Content Include="Content\background.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\blank.xnb">
+    </Content>
+    <Content Include="Content\blank.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\gamefont.spritefont">
+    </Content>
+    <Content Include="Content\gamefont.spritefont">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\gamefont.xnb">
+    </Content>
+    <Content Include="Content\gamefont.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Content\gradient.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Content\menufont.spritefont">
+    <Content Include="Content\menufont.spritefont">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\menufont.xnb">
+    </Content>
+    <Content Include="Content\menufont.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

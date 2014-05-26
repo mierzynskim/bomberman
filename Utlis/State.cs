@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Bomberman
+namespace Bomberman.Utlis
 {
+    /// <summary>
+    /// Enumeracja ułatwiająca idetyfikację stanu danego pola w grze
+    /// </summary>
     [Serializable]
     public enum State
     {
@@ -20,5 +20,6 @@ namespace Bomberman
         Fire, //random
         Exit, // random
         //EndlessBombs // random
+        NewRemoteBomb //random
     }
 }

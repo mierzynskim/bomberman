@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bomberman.Utlis;
 
 namespace Bomberman.SettingsModel
 {
     public class HighScore
     {
-        public string Login { get; set; }
+        public Level Level { get; set; }
         public int Points { get; set; }
     }
 }

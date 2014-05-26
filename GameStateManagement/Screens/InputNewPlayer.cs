@@ -24,14 +24,10 @@ namespace Bomberman.GameStateManagement.Screens
     {
         #region Fields
 
-        static string[] languages = { "C#", "French", "Deoxyribonucleic acid" };
-        static int currentLanguage = 0;
 
-        static bool frobnicate = true;
+        private int delay;
 
-        private int Delay = 0;
-
-        private MenuEntry login1;
+        private readonly MenuEntry login1;
         private ILoadGameStorage loadGameStorage;
         private ISaveGameStorage saveGameStorage;
 
@@ -44,7 +40,7 @@ namespace Bomberman.GameStateManagement.Screens
         /// Constructor.
         /// </summary>
         public InputNewPlayer()
-            : base("Login")
+            : base("Please type your login")
         {
             // Create our menu entries.
             login1 = new MenuEntry("");
@@ -72,7 +68,7 @@ namespace Bomberman.GameStateManagement.Screens
         {
             base.HandleInput(input);
             var state = input.LastKeyboardStates;
-            if (state != null && Delay == 0 && state[0].GetPressedKeys().Length > 0 )
+            if (state != null && delay == 0 && state[0].GetPressedKeys().Length > 0 )
             {
                 if (state[0].GetPressedKeys()[0].ToString().Equals("Back") && login1.Text.Length > 0)
                 {
@@ -82,11 +78,9 @@ namespace Bomberman.GameStateManagement.Screens
                 {
                     login1.Text += state[0].GetPressedKeys()[0].ToString();
                 }
-                
-
 
             }
-            Delay = (Delay + 1) % 6;
+            delay = (delay + 1) % 6;
 
         }
 

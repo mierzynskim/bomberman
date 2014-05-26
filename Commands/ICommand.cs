@@ -6,6 +6,9 @@ using Bomberman.Players;
 
 namespace Bomberman.Commands
 {
+    /// <summary>
+    /// Interfejs wzorca komenta odpowiadającego za akcje podczas rozgrywki
+    /// </summary>
     public interface ICommand
     {
         void Execute(GameActor actor);

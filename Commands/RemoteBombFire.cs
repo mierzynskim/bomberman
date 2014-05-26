@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bomberman.Players;
+using Bomberman.Utlis;
 using Microsoft.Xna.Framework.Content;
 
 namespace Bomberman.Commands
@@ -17,6 +18,10 @@ namespace Bomberman.Commands
         {
             this.manager = manager;
         }
+        /// <summary>
+        /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy uczestnik gry wybierze używa bomby zdalnej
+        /// </summary>
+        /// <param name="actor">Uczestnik gry</param>
         public void Execute(GameActor actor)
         {
             if (actor.TreasureState.RemoteBombsCount > 0)

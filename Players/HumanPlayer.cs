@@ -16,14 +16,14 @@ namespace Bomberman.Players
         {
             Velocity = 5;
             TreasureState.BombsCount = LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].BombsStart;
-            TreasureState.RemoteBombsCount = 20;
-            TreasureState.GlovesCount = 20;
-
         }
 
         public event ChangedEventHandler Changed;
         public event EventHandler<PlayerIndexEventArgs> GameOver;
-
+        /// <summary>
+        /// Metoda odpowiadająca za poruszanie sie gracza sterowanego przez człowieka
+        /// </summary>
+        /// <param name="direction">Kierunek ruchu gracza</param>
         public override void Move(Direction direction)
         {
             if (Delay == Velocity / 2)

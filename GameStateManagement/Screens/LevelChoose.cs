@@ -46,45 +46,26 @@ namespace Bomberman.GameStateManagement.Screens
             // Add entries to the menu.
             MenuEntries.Add(easyLevel);
             MenuEntries.Add(mediumLevel);
+            MenuEntries.Add(hardLevel);
             MenuEntries.Add(back);
         }
 
         private void EasyLevelOnSelected(object sender, PlayerIndexEventArgs e)
         {
             MonoGameFileSystem.Instance.CurrentPlayerSettings.Level = Level.Easy;
-            ScreenManager.AddScreen(new EasyLevelsUnlocked(), e.PlayerIndex);
+            ScreenManager.AddScreen(new LevelsUnlocked(), e.PlayerIndex);
         }
         private void MediumLevelOnSelected(object sender, PlayerIndexEventArgs e)
         {
-            ScreenManager.AddScreen(new EasyLevelsUnlocked(), e.PlayerIndex);
+            MonoGameFileSystem.Instance.CurrentPlayerSettings.Level = Level.Medium;
+            ScreenManager.AddScreen(new LevelsUnlocked(), e.PlayerIndex);
         }
         private void HardLevelOnSelected(object sender, PlayerIndexEventArgs e)
         {
-            ScreenManager.AddScreen(new EasyLevelsUnlocked(), e.PlayerIndex);
+            MonoGameFileSystem.Instance.CurrentPlayerSettings.Level = Level.Hard;
+            ScreenManager.AddScreen(new LevelsUnlocked(), e.PlayerIndex);
         }
 
-
-
-        protected override void OnCancel(PlayerIndex playerIndex)
-        {
-            const string message = "Are you sure you want to exit this sample?";
-
-            MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
-
-            confirmExitMessageBox.Accepted += ConfirmExitMessageBoxAccepted;
-
-            ScreenManager.AddScreen(confirmExitMessageBox, playerIndex);
-        }
-
-
-        /// <summary>
-        /// Event handler for when the user selects ok on the "are you sure
-        /// you want to exit" message box.
-        /// </summary>
-        void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
-        {
-            ScreenManager.Game.Exit();
-        }
 
     }
 }

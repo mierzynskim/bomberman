@@ -20,6 +20,10 @@ namespace Bomberman.Commands
             this.x = x;
             this.y = y;
         }
+        /// <summary>
+        /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy ustawiona jest bomba zwykła i minie czas do jej wybuchu
+        /// </summary>
+        /// <param name="actor">Uczestnik gry</param>
 
         public void Execute(GameActor actor)
         {

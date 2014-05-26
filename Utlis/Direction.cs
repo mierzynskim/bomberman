@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Bomberman.Utlis
 {
+    /// <summary>
+    /// Enumeracja ułatwiająca identyfikacją kierunku ruchu
+    /// </summary>
     [Serializable]
     public enum Direction
     {

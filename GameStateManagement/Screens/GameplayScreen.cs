@@ -14,6 +14,7 @@ using System.Threading;
 using Bomberman;
 using Bomberman.Algorithms;
 using Bomberman.Players;
+using Bomberman.SettingsModel;
 using Bomberman.StateImplementation;
 using Bomberman.Utlis;
 using Microsoft.Xna.Framework;
@@ -44,17 +45,10 @@ namespace GameStateManagement
 
 
         private double prevSeconds;
-        private static bool isPaused;
-
+        private Level level;
         private double seconds;
-        public static bool IsPaused
-        {
-            get { return isPaused; }
-            set
-            {
-                isPaused = value;
-            }
-        }
+        public static bool IsPaused { private get; set; }
+
         #endregion
 
         #region Initialization
@@ -77,6 +71,8 @@ namespace GameStateManagement
         /// </summary>
         public override void LoadContent()
         {
+            seconds = 0;
+            level = MonoGameFileSystem.Instance.CurrentPlayerSettings.Level;
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
             var previousSession = MonoGameFileSystem.Instance.LoadGame(new LoadGame());
@@ -86,7 +82,14 @@ namespace GameStateManagement
             else
             {
                 //TODO refactor?
-                var list = new List<ComputerPlayer> { new ComputerPlayer(new AStarAlgorithm()), new ComputerPlayer(new RandomMove()) };
+                var list = new List<ComputerPlayer>();
+                for (int i = 0; i < LevelConsts.LevelProperties[level].EnemiesCount; i++)
+                {
+                    if (MonoGameFileSystem.Instance.CurrentPlayerSettings.Stage <= i)
+                        list.Add(new ComputerPlayer(new RandomMove()));
+                    else
+                        list.Add(new ComputerPlayer(new AStarAlgorithm()));
+                }
                 gameController = new GameSession(ScreenManager.Game.Content) { HumanPlayer = new HumanPlayer(), ComputerPlayers = list };
 
                 GameSession.GameBoard.AddPlayer(gameController.HumanPlayer);
@@ -116,6 +119,7 @@ namespace GameStateManagement
         {
             //var savegame = new SaveGame(gameController);
             //MonoGameFileSystem.Instance.SaveGame(savegame);
+            MonoGameFileSystem.Instance.SaveGameStorage(new SaveGameStorage());
             content.Unload();
         }
 
@@ -136,10 +140,7 @@ namespace GameStateManagement
             base.Update(gameTime, otherScreenHasFocus, false);
 
             // Gradually fade in or out depending on whether we are covered by the pause screen.
-            if (coveredByOtherScreen)
-                pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
-            else
-                pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
+            pauseAlpha = coveredByOtherScreen ? Math.Min(pauseAlpha + 1f / 32, 1) : Math.Max(pauseAlpha - 1f / 32, 0);
 
             if (IsActive)
             {
@@ -152,8 +153,26 @@ namespace GameStateManagement
                     computerPlayer.MakeMove();
                 }
                 gameController.CheckForKilled();
+                if (gameController.CheckLevelChanged(MonoGameFileSystem.Instance.CurrentPlayerSettings.Stage))
+                    LevelUp();
 
             }
+        }
+
+        private void LevelUp()
+        {
+            IsPaused = true;
+            gameController.HumanPlayer.OverallPoints += gameController.HumanPlayer.LevelPoints;
+            string message = String.Format("LEVEL UP!\nEnemies killed: {0}\nBombs left: {1}\nLevel points: {2}\nPlayer points: {3}",
+                LevelConsts.LevelProperties[level].EnemiesCount - gameController.ComputerPlayers.Count,
+                gameController.HumanPlayer.TreasureState.BombsCount,
+                gameController.HumanPlayer.LevelPoints,
+                gameController.HumanPlayer.OverallPoints);
+            MonoGameFileSystem.Instance.CurrentPlayerSettings.HighScores.Add(new HighScore { Level = level, Points = gameController.HumanPlayer.OverallPoints });
+            MessageBoxScreen levelupScreen = new MessageBoxScreen(message);
+            levelupScreen.Accepted +=
+                (sender, e) => LoadingScreen.Load(ScreenManager, true, e.PlayerIndex, new GameplayScreen());
+            ScreenManager.AddScreen(levelupScreen, ControllingPlayer);
         }
 
 
@@ -195,16 +214,14 @@ namespace GameStateManagement
             if (!IsPaused)
             {
                 seconds += gameTime.ElapsedGameTime.TotalSeconds;
-                if ((int) seconds - (int) prevSeconds == 1)
+                if ((int)seconds - (int)prevSeconds == 1)
                     gameController.HumanPlayer.LevelPoints -=
-                        LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level]
-                            .DurationPenalty;
-                
+                        LevelConsts.LevelProperties[level].DurationPenalty;
+
                 prevSeconds = seconds;
                 gameController.HumanPlayer.LevelPoints = Math.Abs(gameController.HumanPlayer.LevelPoints);
             }
-            ScreenManager.GraphicsDevice.Clear(ClearOptions.Target,
-                Color.Green, 0, 0);
+            ScreenManager.GraphicsDevice.Clear(ClearOptions.Target, Color.Green, 0, 0);
             ScreenManager.SpriteBatch.Begin();
             string levelText = String.Format("Level {0}", MonoGameFileSystem.Instance.CurrentPlayerSettings.Stage);
 
@@ -256,8 +273,7 @@ namespace GameStateManagement
 
         void ConfirmQuitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
         {
-            LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
-                                                           new MainMenuScreen());
+            LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new MainMenuScreen());
             ExitScreen();
         }
 

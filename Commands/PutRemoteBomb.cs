@@ -29,6 +29,10 @@ namespace Bomberman.Commands
         {
             this.manager = manager;
         }
+        /// <summary>
+        /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy uczestnik gry chce ustawić bombę zdalną
+        /// </summary>
+        /// <param name="actor">Uczestnik gry</param>
         public void Execute(GameActor actor)
         {
             if (actor.TreasureState.BombsCount > 0 && delay == 4)

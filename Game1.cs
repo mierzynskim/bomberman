@@ -55,8 +55,7 @@ namespace Bomberman
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Green);
-            // TODO: Add your drawing code here
-            //
+
 
             base.Draw(gameTime);
         }

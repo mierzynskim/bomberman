@@ -14,6 +14,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Bomberman
 {
+    /// <summary>
+    /// Kontroler gry
+    /// </summary>
     [Serializable]
     public class GameSession
     {
@@ -36,6 +39,7 @@ namespace Bomberman
 
         public List<ComputerPlayer> ComputerPlayers { get; set; }
 
+
         public HumanPlayer HumanPlayer
         {
             get { return humanPlayer; }
@@ -51,6 +55,7 @@ namespace Bomberman
         {
             manager = contentManager;
             GameBoard = new Board(20, 20, contentManager);
+            CurrentLevel = MonoGameFileSystem.Instance.CurrentPlayerSettings.Stage;
         }
 
         public GameSession()
@@ -59,7 +64,10 @@ namespace Bomberman
         }
 
 
-
+        /// <summary>
+        /// Metoda odrysowująca jednostki zgodnie z ich stanem
+        /// </summary>
+        /// <param name="target"></param>
         public void RedrawBoard(SpriteBatch target)
         {
             for (var i = 0; i < GameBoard.Height; i++)
@@ -68,7 +76,11 @@ namespace Bomberman
                     GameBoard.Units[i, j].Draw(target);
                 }
         }
-
+        /// <summary>
+        /// Sprawdza obecny stan klawiatury
+        /// </summary>
+        /// <param name="currentKeyboardState">Stan klawiatury</param>
+        /// <returns>Komenda związana z daną kombinacja klawiszy</returns>
         public ICommand HandleInput(KeyboardState currentKeyboardState)
         {
             if (currentKeyboardState.GetPressedKeys().Contains(Keys.Up) && currentKeyboardState.GetPressedKeys().Contains(Keys.D3))
@@ -98,7 +110,12 @@ namespace Bomberman
 
             return null;
         }
-
+        /// <summary>
+        /// Sprawdza czy dany ruch jest możliwy do wykonania
+        /// </summary>
+        /// <param name="x">Pozycja x na planszy</param>
+        /// <param name="y">Pozycja y na planszy</param>
+        /// <returns></returns>
         public static bool IsMoveValid(int x, int y)
         {
             return x > 0 && y > 0 && x < GameBoard.Width && y < GameBoard.Height &&
@@ -106,7 +123,9 @@ namespace Bomberman
                    && GameBoard.Units[x, y].UnitState != State.Enemy && GameBoard.Units[x, y].UnitState != State.Player;
 
         }
-
+        /// <summary>
+        /// Usuwa zabitych graczy z planszy
+        /// </summary>
         public void CheckForKilled()
         {
             for (int i = 0; i < ComputerPlayers.Count; i++)
@@ -117,6 +136,15 @@ namespace Bomberman
                     ComputerPlayers.RemoveAt(i);
                 }
             }
+        }
+        /// <summary>
+        /// Sprawdza czy zmienił się poziom gry
+        /// </summary>
+        /// <param name="stage">Obecny poziom gry</param>
+        /// <returns></returns>
+        public bool CheckLevelChanged(int stage)
+        {
+            return stage != CurrentLevel;
         }
     }
 }

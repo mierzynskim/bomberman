@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Bomberman.SettingsModel
 {
+    /// <summary>
+    /// Klasa odpowiadająca za trzymanie informacji o wszystkich graczach w grze
+    /// </summary>
     public class GameStorage
     {
         public GameStorage()

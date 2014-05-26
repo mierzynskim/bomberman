@@ -20,7 +20,10 @@ namespace Bomberman.StateImplementation
         private const string containerName = "MyGamesStorage";
         private const string filename = "gameStorage.sav";
         private StorageContainer container;
-
+        /// <summary>
+        /// Odczytuje obiekt GameStorage
+        /// </summary>
+        /// <returns></returns>
         public GameStorage Load()
         {
             if (!Guide.IsVisible)
@@ -37,8 +40,11 @@ namespace Bomberman.StateImplementation
             }
             return null;
         }
-
-        void LoadFromDevice(IAsyncResult result)
+        /// <summary>
+        /// Metoda ładująca plik konfiguracji
+        /// </summary>
+        /// <param name="result">Resultat operacji</param>
+        private void LoadFromDevice(IAsyncResult result)
         {
             device = StorageDevice.EndShowSelector(result);
             IAsyncResult r = device.BeginOpenContainer(containerName, null, null);
@@ -46,7 +52,10 @@ namespace Bomberman.StateImplementation
             container = device.EndOpenContainer(r);
             result.AsyncWaitHandle.Close();
         }
-
+        /// <summary>
+        /// Metoda pomocnicza deserializująca obiekt stanu gry
+        /// </summary>
+        /// <param name="container"></param>
         private static GameStorage Deserialize(StorageContainer container)
         {
             if (container.FileExists(filename))

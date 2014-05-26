@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Bomberman.Utlis
 {
+    /// <summary>
+    /// Klasa zawierająca słownik stałych dla danego poziomu gry
+    /// </summary>
     public static class LevelConsts
     {
         public static Dictionary<Level, LevelProperties> LevelProperties = new Dictionary<Level, LevelProperties>
@@ -15,7 +18,9 @@ namespace Bomberman.Utlis
                 DurationPenalty = 3,
                 EnemyKilledPoints = 20,
                 TreasureFoundPoints = 10,
-                LevelFinishedPoints = 100
+                LevelFinishedPoints = 100,
+                EnemiesCount = 5
+                
             }},
             {Level.Medium, new LevelProperties
             {
@@ -23,7 +28,8 @@ namespace Bomberman.Utlis
                 DurationPenalty = 2,
                 EnemyKilledPoints = 20,
                 TreasureFoundPoints = 10,
-                LevelFinishedPoints = 100
+                LevelFinishedPoints = 200,
+                EnemiesCount = 10
             }},
             {Level.Hard, new LevelProperties
             {
@@ -31,7 +37,8 @@ namespace Bomberman.Utlis
                 DurationPenalty = 1,
                 EnemyKilledPoints = 20,
                 TreasureFoundPoints = 10,
-                LevelFinishedPoints = 100
+                LevelFinishedPoints = 300,
+                EnemiesCount = 15
             }}
         };
     }

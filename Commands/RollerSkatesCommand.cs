@@ -23,6 +23,12 @@ namespace Bomberman.Commands
         {
             this.manager = manager;
         }
+        /// <summary>
+        /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy uczestnik gry wybierze wrotki
+        /// Tworzony jest wątek odliczający czas użycia wrotek.
+        /// Po danym czasie prędkość uczestnika wraca to wartości początkowej
+        /// </summary>
+        /// <param name="actor">Uczestnik gry</param>
         public void Execute(GameActor actor)
         {
             if (actor.TreasureState.IsRollerSkates)
@@ -35,7 +41,6 @@ namespace Bomberman.Commands
                     previousVelocity = actor.Velocity;
                     actor.Velocity = 3;
                     Thread.Sleep(DelayTime * 1000);
-                    GameSession.GameBoard.ResetNeighbors(GameSession.GameBoard.Units[x, y], 1);
                     actor.TreasureState.IsRollerSkates = false;
                     actor.Velocity = previousVelocity;
                     Thread.CurrentThread.Abort();

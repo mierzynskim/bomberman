@@ -8,15 +8,25 @@ namespace Bomberman.SettingsModel
 {
     public class PlayerSettings
     {
-
+        private List<HighScore> highScores;
         public string Login { get; set; }
-        public List<HighScore> HighScores { get; set; }
         public Level Level { get; set; }
         public int EasyLevelsUnlocked { get; set; }
         public int MediumLevelsUnlocked { get; set; }
         public int HardLevelsUnlocked { get; set; }
-
         public int Stage { get; set; }
 
+        public List<HighScore> HighScores
+        {
+            get
+            {
+                return highScores;
+            }
+            set
+            {
+                highScores = value;
+                highScores = highScores.OrderBy(score => score.Points).Take(10).ToList();
+            }
+        }
     }
 }

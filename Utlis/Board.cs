@@ -10,7 +10,11 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Bomberman.Utlis
 {
+    /// <summary>
+    /// Klasa obsługująca plansze gry
+    /// </summary>
     [Serializable]
+    
     public class Board
     {
         private static readonly Random rnd = new Random();
@@ -26,6 +30,12 @@ namespace Bomberman.Utlis
         {
             manager = null;
         }
+        /// <summary>
+        /// Konstruktor tworzy nową planszę i wypełnia ją losowo teksturami Concrete i Wall
+        /// </summary>
+        /// <param name="width">Szerokość planszy w jednostkach Unit</param>
+        /// <param name="height">Wysokość planszy w jednostkach Unit</param>
+        /// <param name="manager">Obiekt ContentManager zawierający zasoby gry</param>
         public Board(int width, int height, ContentManager manager)
         {
             Width = width;
@@ -57,6 +67,10 @@ namespace Bomberman.Utlis
         public int Height { get; set; }
         public Unit[,] Units { get; set; }
 
+        /// <summary>
+        /// Dodaje nowego gracza sterowanego przez człowika
+        /// </summary>
+        /// <param name="player">Obiekt gracza</param>
         public void AddPlayer(HumanPlayer player)
         {
             bool isAdded = false;
@@ -77,7 +91,10 @@ namespace Bomberman.Utlis
                     break;
             }
         }
-
+        /// <summary>
+        /// Dodaje nowego gracza sterowanego przez komputer
+        /// </summary>
+        /// <param name="player">Obiekt gracza</param>
         public void AddComputerPlayer(ComputerPlayer player)
         {
             bool isAdded = false;
@@ -98,7 +115,11 @@ namespace Bomberman.Utlis
                     break;
             }
         }
-
+        /// <summary>
+        /// Zwraca wolne otoczenie danej jednostki
+        /// </summary>
+        /// <param name="unit">Obiekt sprawdzanej jednostki</param>
+        /// <returns></returns>
         public IEnumerable<Unit> GetFreeNeighbors(Unit unit)
         {
             var neighbors = new List<Unit>();
@@ -113,7 +134,12 @@ namespace Bomberman.Utlis
 
             return neighbors;
         }
-
+        /// <summary>
+        /// Zwraca zasięg bomby 
+        /// </summary>
+        /// <param name="unit">Obiekt sprawdzanej jednostki</param>
+        /// <param name="range">Zasięg bomby</param>
+        /// <returns></returns>
         private IEnumerable<Unit> GetBombRange(Unit unit, int range)
         {
             var neighbors = new List<Unit>();
@@ -139,7 +165,11 @@ namespace Bomberman.Utlis
             neighbors.Add(unit);
             return neighbors;
         }
-
+        /// <summary>
+        /// Usuwa tekstury z pól w obrębie zasięgu bomby
+        /// </summary>
+        /// <param name="unit">Obiekt sprawdzanej jednostki</param>
+        /// <param name="range">Zasięg bomby</param>
         public void ResetNeighbors(Unit unit, int range)
         {
             unit.ResetState();
@@ -162,7 +192,11 @@ namespace Bomberman.Utlis
             }
         }
 
-
+        /// <summary>
+        /// Sprawdza czy w obrębie zasięgu bomby nie znajduje się gracz
+        /// </summary>
+        /// <param name="unit">Obiekt sprawdzanej jednostki</param>
+        /// <returns></returns>
         public bool IsPlayerAround(Unit unit)
         {
             foreach (var freeNeighbor in GetBombRange(unit, 1))

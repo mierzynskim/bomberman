@@ -9,6 +9,7 @@
 
 #region Using Statements
 
+using System;
 using Bomberman.GameStateManagement.Screens;
 using Microsoft.Xna.Framework;
 #endregion
@@ -40,6 +41,7 @@ namespace GameStateManagement
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
+            highScoreMenuEntry.Selected += HighScoreMenuEntryOnSelected;
             exitMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
@@ -50,6 +52,10 @@ namespace GameStateManagement
             MenuEntries.Add(exitMenuEntry);
         }
 
+        private void HighScoreMenuEntryOnSelected(object sender, PlayerIndexEventArgs e)
+        {
+            ScreenManager.AddScreen(new HighScoresScreen(), e.PlayerIndex);
+        }
 
         #endregion
 

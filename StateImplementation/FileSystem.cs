@@ -7,6 +7,9 @@ using Bomberman.StateInterfaces;
 
 namespace Bomberman.StateImplementation
 {
+    /// <summary>
+    /// Klasa abstrakcyjna do operacji logowania/zapisu/odczytu
+    /// </summary>
     public abstract class FileSystem
     {
 
@@ -19,8 +22,7 @@ namespace Bomberman.StateImplementation
 
         public abstract void SaveGame(ISaveGameState saveType);
 
-        public abstract void LoadHighScores(ILoadHighScores loadScoresType);
         public abstract GameStorage LoadGameStorage(ILoadGameStorage loadGameStorage);
-        public abstract void SaveGameStorage(ISaveGameStorage saveGameStorage, GameStorage gameStorage);
+        public abstract void SaveGameStorage(ISaveGameStorage saveGameStorage);
     }
 }

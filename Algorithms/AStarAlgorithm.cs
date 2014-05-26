@@ -10,7 +10,12 @@ namespace Bomberman.Algorithms
     [Serializable]
     public class AStarAlgorithm: AiAlgorithm
     {
-
+        /// <summary>
+        /// Implementacja ruchu przeciwnika za pomocą algorytmu A*
+        /// </summary>
+        /// <param name="start">jednostka początkowa wyszukiwania</param>
+        /// <param name="end">jednostka końcowa wyszukiwania</param>
+        /// <returns></returns>
         public override IEnumerable<Direction> FindPath(Unit start, Unit end)
         {
             HeapPriorityQueue<Unit> openList = new HeapPriorityQueue<Unit>(GameSession.GameBoard.Height * GameSession.GameBoard.Width);
@@ -21,7 +26,7 @@ namespace Bomberman.Algorithms
             start.Priority = 0;
             openList.Enqueue(start, 0);
             start.Opened = true;
-            while (openList.Count != 0)
+            while (openList.Count != 0 && start.UnitState != State.Empty)
             {
                 var unit = openList.Dequeue();
                 unit.Closed = true;

@@ -27,6 +27,12 @@ namespace Bomberman.Commands
             this.x = x;
             this.y = y;
         }
+        /// <summary>
+        /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy uczestnik gry wybierze zwykłą bombę
+        /// Tworzony jest wątek odliczający czas do wybuchu.
+        /// Po danym czasie następuje eksplozja
+        /// </summary>
+        /// <param name="actor">Uczestnik gry</param>
         public void Execute(GameActor actor)
         {
             if (actor.TreasureState.BombsCount > 0 && (delay == 4 || inst))

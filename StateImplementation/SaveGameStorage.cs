@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Bomberman.StateImplementation
 {
+
     public class SaveGameStorage : ISaveGameStorage
     {
         private StorageDevice device;
@@ -19,7 +20,10 @@ namespace Bomberman.StateImplementation
         private const string Filename = "gameStorage.sav";
         private StorageContainer container;
 
-
+        /// <summary>
+        /// Zapisuje obiekt GameStorage
+        /// </summary>
+        /// <param name="gameStorage">Obiekt zawierający stan gry</param>
         public void Save(GameStorage gameStorage)
         {
             if (!Guide.IsVisible)
@@ -32,7 +36,10 @@ namespace Bomberman.StateImplementation
                 Serialize(container, gameStorage);
             }
         }
-
+        /// <summary>
+        /// Metoda ładująca plik konfiguracji
+        /// </summary>
+        /// <param name="result">Resultat operacji</param>
         void LoadFromDevice(IAsyncResult result)
         {
             device = StorageDevice.EndShowSelector(result);
@@ -41,7 +48,11 @@ namespace Bomberman.StateImplementation
             container = device.EndOpenContainer(r);
             result.AsyncWaitHandle.Close();
         }
-
+        /// <summary>
+        /// Metoda pomocnicza serializująca obiekt stanu gry
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="gameStorage"></param>
         private static void Serialize(StorageContainer container, GameStorage gameStorage)
         {
             if (container.FileExists(Filename))

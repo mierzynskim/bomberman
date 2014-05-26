@@ -1,11 +1,16 @@
 ﻿using System;
 using Bomberman.Utlis;
+using GameStateManagement;
 
 namespace Bomberman.Players
 {
+    /// <summary>
+    /// Klasa abstrakcyjna dla uczestnika gry
+    /// </summary>
     [Serializable]
     public abstract class GameActor
     {
+
         public GameActor()
         {
             TreasureState = new TreasureState();
