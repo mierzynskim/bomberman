@@ -1,22 +1,12 @@
-﻿#region File Description
-
-#endregion
-
-#region Using Statements
-
-using System;
+﻿
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
-#endregion
+
 
 namespace Bomberman.GameStateManagement.Screens
 {
-    /// <summary>
-    /// The options screen is brought up over the top of the main menu
-    /// screen, and gives the user a chance to configure the game
-    /// in various hopefully useful ways.
-    /// </summary>
+
     public class LoginScreen : MenuScreen
     {
 
@@ -68,11 +58,6 @@ namespace Bomberman.GameStateManagement.Screens
             ScreenManager.AddScreen(confirmExitMessageBox, playerIndex);
         }
 
-
-        /// <summary>
-        /// Event handler for when the user selects ok on the "are you sure
-        /// you want to exit" message box.
-        /// </summary>
         void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
         {
             ScreenManager.Game.Exit();

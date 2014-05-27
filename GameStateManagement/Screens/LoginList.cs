@@ -1,8 +1,4 @@
-﻿#region File Description
-
-#endregion
-
-#region Using Statements
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -12,25 +8,14 @@ using Bomberman.StateInterfaces;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
-#endregion
 
 namespace Bomberman.GameStateManagement.Screens
 {
-    /// <summary>
-    /// The options screen is brought up over the top of the main menu
-    /// screen, and gives the user a chance to configure the game
-    /// in various hopefully useful ways.
-    /// </summary>
+
     public class LoginList : MenuScreen
     {
-        #region Fields
-        private ILoadGameStorage loadGameStorage;
-        private ISaveGameStorage saveGameStorage;
-
-        #endregion
-
-        #region Initialization
-
+        private readonly ILoadGameStorage loadGameStorage;
+        private readonly ISaveGameStorage saveGameStorage;
 
         /// <summary>
         /// Constructor.
@@ -52,11 +37,10 @@ namespace Bomberman.GameStateManagement.Screens
 
             MenuEntry back = new MenuEntry("Back");
 
-            //login1.Selected += Login1OnSelected;
+
 
             back.Selected += OnCancel;
 
-            // Add entries to the menu.
             foreach (var menuEntry in menuitems)
             {
                 MenuEntries.Add(menuEntry);
@@ -72,6 +56,5 @@ namespace Bomberman.GameStateManagement.Screens
             ScreenManager.AddScreen(new MainMenuScreen(), playerIndexEventArgs.PlayerIndex);
         }
 
-        #endregion
     }
 }

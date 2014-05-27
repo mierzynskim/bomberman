@@ -1,8 +1,4 @@
-﻿#region File Description
-
-#endregion
-
-#region Using Statements
+﻿
 
 using System;
 using Bomberman.Sounds;
@@ -11,15 +7,10 @@ using Bomberman.Utlis;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
-#endregion
 
 namespace Bomberman.GameStateManagement.Screens
 {
-    /// <summary>
-    /// The options screen is brought up over the top of the main menu
-    /// screen, and gives the user a chance to configure the game
-    /// in various hopefully useful ways.
-    /// </summary>
+
     public class LevelChoose : MenuScreen
     {
 
@@ -27,7 +18,7 @@ namespace Bomberman.GameStateManagement.Screens
         /// Constructor.
         /// </summary>
         public LevelChoose()
-            : base("Login")
+            : base("Choose level")
         {
             // Create our menu entries.
             MenuEntry easyLevel = new MenuEntry("Easy");

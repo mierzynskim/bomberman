@@ -78,6 +78,7 @@
     <Compile Include="Commands\PutRemoteBomb.cs" />
     <Compile Include="Commands\RemoteBombFire.cs" />
     <Compile Include="Commands\RollerSkatesCommand.cs" />
+    <Compile Include="GameStateManagement\Screens\HelpScreen.cs" />
     <Compile Include="GameStateManagement\Screens\HighScoresScreen.cs" />
     <Compile Include="Utlis\LevelInfo.cs" />
     <Compile Include="Utlis\LevelProperties.cs" />

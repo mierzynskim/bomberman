@@ -1,28 +1,16 @@
-﻿#region File Description
-
-#endregion
-
-#region Using Statements
-
-using System;
+﻿using System;
 using Bomberman.SettingsModel;
 using Bomberman.StateImplementation;
 using Bomberman.StateInterfaces;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
-#endregion
+
 
 namespace Bomberman.GameStateManagement.Screens
 {
-    /// <summary>
-    /// The options screen is brought up over the top of the main menu
-    /// screen, and gives the user a chance to configure the game
-    /// in various hopefully useful ways.
-    /// </summary>
     public class InputNewPlayer : MenuScreen
     {
-        #region Fields
 
 
         private int delay;
@@ -30,10 +18,6 @@ namespace Bomberman.GameStateManagement.Screens
         private readonly MenuEntry login1;
         private ILoadGameStorage loadGameStorage;
         private ISaveGameStorage saveGameStorage;
-
-        #endregion
-
-        #region Initialization
 
 
         /// <summary>
@@ -84,6 +68,5 @@ namespace Bomberman.GameStateManagement.Screens
 
         }
 
-        #endregion
     }
 }

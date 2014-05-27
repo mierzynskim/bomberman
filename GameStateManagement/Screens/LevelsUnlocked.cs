@@ -1,10 +1,4 @@
-﻿#region File Description
-
-#endregion
-
-#region Using Statements
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Bomberman.SettingsModel;
 using Bomberman.StateImplementation;
@@ -13,36 +7,21 @@ using Bomberman.Utlis;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
-#endregion
 
 namespace Bomberman.GameStateManagement.Screens
 {
-    /// <summary>
-    /// The options screen is brought up over the top of the main menu
-    /// screen, and gives the user a chance to configure the game
-    /// in various hopefully useful ways.
-    /// </summary>
+
     public class LevelsUnlocked : MenuScreen
     {
-        #region Fields
-
-
-        #endregion
-
-        #region Initialization
-
-        private Level level;
         /// <summary>
         /// Constructor.
         /// </summary>
         public LevelsUnlocked()
-            : base("Login")
+            : base("Unlocked levels")
         {
-            // Create our menu entries.
 
             var menuitems = new List<MenuEntry>();
             int stagesCount = 0;
-            level = MonoGameFileSystem.Instance.CurrentPlayerSettings.Level;
             switch (MonoGameFileSystem.Instance.CurrentPlayerSettings.Level)
             {
                 case Level.Easy:
@@ -85,6 +64,5 @@ namespace Bomberman.GameStateManagement.Screens
             }
         }
 
-        #endregion
     }
 }

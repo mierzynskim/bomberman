@@ -1,10 +1,4 @@
-﻿#region File Description
-
-#endregion
-
-#region Using Statements
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Bomberman.SettingsModel;
@@ -14,23 +8,12 @@ using Bomberman.Utlis;
 using GameStateManagement;
 using Microsoft.Xna.Framework;
 
-#endregion
 
 namespace Bomberman.GameStateManagement.Screens
 {
-    /// <summary>
-    /// The options screen is brought up over the top of the main menu
-    /// screen, and gives the user a chance to configure the game
-    /// in various hopefully useful ways.
-    /// </summary>
     public class HighScoresScreen : MenuScreen
     {
-        #region Fields
 
-
-        #endregion
-
-        #region Initialization
 
         private Level level;
         /// <summary>
@@ -62,7 +45,5 @@ namespace Bomberman.GameStateManagement.Screens
             }
             MenuEntries.Add(back);
         }
-
-        #endregion
     }
 }
