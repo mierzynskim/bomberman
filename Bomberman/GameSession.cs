@@ -102,7 +102,7 @@ namespace Bomberman
                 return new MoveUnitCommand(Direction.Down, Player);
             if (currentKeyboardState.IsKeyDown(Keys.D1))
                 return new PutNormalBomb(Manager, humanPlayer.CurrentUnit.X, humanPlayer.CurrentUnit.Y, false);
-            if (currentKeyboardState.IsKeyDown(Keys.D4))
+            if (currentKeyboardState.IsKeyDown(Keys.D2))
                 return new PutRemoteBomb(Manager);
             if (currentKeyboardState.IsKeyDown(Keys.Space))
                 return new RemoteBombFire(Manager);

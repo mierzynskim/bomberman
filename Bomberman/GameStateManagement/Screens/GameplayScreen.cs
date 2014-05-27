@@ -93,9 +93,6 @@ namespace Bomberman.GameStateManagement.Screens
             content.Unload();
         }
 
-
-
-
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
         {
