@@ -11,18 +11,11 @@ namespace Bomberman.Commands
 {
     public class RollerSkatesCommand : ICommand
     {
-        private ContentManager manager;
 
-        private bool isTimerOn;
         private const int DelayTime = 10;
-        private int x;
-        private int y;
+
         private int previousVelocity;
 
-        public RollerSkatesCommand(ContentManager manager)
-        {
-            this.manager = manager;
-        }
         /// <summary>
         /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy uczestnik gry wybierze wrotki
         /// Tworzony jest wątek odliczający czas użycia wrotek.
@@ -33,9 +26,6 @@ namespace Bomberman.Commands
         {
             if (actor.TreasureState.IsRollerSkates)
             {
-                x = actor.CurrentUnit.X;
-                y = actor.CurrentUnit.Y;
-                isTimerOn = true;
                 var thread = new Thread(() =>
                 {
                     previousVelocity = actor.Velocity;

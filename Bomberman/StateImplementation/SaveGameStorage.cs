@@ -12,7 +12,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Bomberman.StateImplementation
 {
-
+    /// <summary>
+    /// Klasa odpowiedzialna za zapisywanie zasobów gry (ustawień użytkownika itp.)
+    /// </summary>
     public class SaveGameStorage : ISaveGameStorage
     {
         private StorageDevice device;

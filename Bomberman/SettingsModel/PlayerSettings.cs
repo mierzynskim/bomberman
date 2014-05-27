@@ -6,6 +6,9 @@ using Bomberman.Utlis;
 
 namespace Bomberman.SettingsModel
 {
+    /// <summary>
+    /// Klasa ustawień danego gracza
+    /// </summary>
     public class PlayerSettings
     {
         private List<HighScore> highScores;

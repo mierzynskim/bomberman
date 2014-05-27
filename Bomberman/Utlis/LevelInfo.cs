@@ -10,7 +10,7 @@ namespace Bomberman.Utlis
     /// </summary>
     public static class LevelConsts
     {
-        public static Dictionary<Level, LevelProperties> LevelProperties = new Dictionary<Level, LevelProperties>
+        public static readonly Dictionary<Level, LevelProperties> LevelProperties = new Dictionary<Level, LevelProperties>
         {
             {Level.Easy, new LevelProperties
             {

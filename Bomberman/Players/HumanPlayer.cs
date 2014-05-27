@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework;
 
 namespace Bomberman.Players
 {
+    /// <summary>
+    /// Klasa gracza serowanego przez człowieka
+    /// </summary>
     [Serializable]
     public class HumanPlayer : GameActor
     {

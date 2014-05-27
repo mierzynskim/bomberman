@@ -7,6 +7,9 @@ using Priority_Queue;
 
 namespace Bomberman.Algorithms
 {
+    /// <summary>
+    /// Klasa implementująca algorytm A*
+    /// </summary>
     [Serializable]
     public class AStarAlgorithm: AiAlgorithm
     {

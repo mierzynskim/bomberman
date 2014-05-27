@@ -58,7 +58,11 @@ namespace Bomberman.StateImplementation
             CurrentPlayerSettings = player;
             return player;
         }
-
+        /// <summary>
+        /// Ładuje stan rozgrywki
+        /// </summary>
+        /// <param name="loadType"></param>
+        /// <returns></returns>
         public override GameSession LoadGame(ILoadGameState loadType)
         {
             //return (GameSession) loadType.LoadGameState<GameSession>();

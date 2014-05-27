@@ -6,8 +6,12 @@ using System.Text;
 
 namespace Bomberman.Sounds
 {
+    /// <summary>
+    /// Wzorzec pozwalający używać wielu implementacji dźwięku.
+    /// </summary>
     public static class ServiceLocator
     {
+
         public static void Provide(Audio service)
         {
             AudioSerivce = service;

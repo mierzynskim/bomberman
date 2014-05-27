@@ -137,7 +137,7 @@ namespace Bomberman.Utlis
                     break;
                 case State.RollerSkates:
                     actor.TreasureState.IsRollerSkates = true;
-                    var command = new RollerSkatesCommand(GameSession.Manager);
+                    var command = new RollerSkatesCommand();
                     command.Execute(actor);
 
                     break;

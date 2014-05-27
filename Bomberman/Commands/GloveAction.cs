@@ -19,6 +19,11 @@ namespace Bomberman.Commands
             this.direction = direction;
             this.manager = manager;
         }
+        /// <summary>
+        /// Implementacja wzorca komenda. Metoda jest wywoływana, kiedy uczestnik gry używa rękawicy
+        /// Sprawdzane są możliwe kierunki położenia bomby za pomocą rękawicy 
+        /// </summary>
+        /// <param name="actor">Uczestnik gry</param>
         public void Execute(GameActor actor)
         {
             int x = actor.CurrentUnit.X;

@@ -13,6 +13,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Bomberman.GameStateManagement.Screens
 {
+    /// <summary>
+    /// G³ówny ekran gry
+    /// </summary>
     class GameplayScreen : GameScreen
     {
 

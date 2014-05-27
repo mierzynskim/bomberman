@@ -12,6 +12,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Bomberman.StateImplementation
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za ładowanie zasobów gry (ustawień użytkownika itp.)
+    /// </summary>
     public class LoadGameStorage: ILoadGameStorage
     {
 

@@ -6,6 +6,9 @@ using Bomberman.Utlis;
 
 namespace Bomberman.SettingsModel
 {
+    /// <summary>
+    /// Model najlepszych wyników
+    /// </summary>
     public class HighScore
     {
         public Level Level { get; set; }

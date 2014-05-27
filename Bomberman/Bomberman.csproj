@@ -196,7 +196,6 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Bomberman_TemporaryKey.pfx" />
     <Content Include="Content\background.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

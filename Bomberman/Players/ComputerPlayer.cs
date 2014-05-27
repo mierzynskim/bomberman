@@ -9,6 +9,9 @@ using GameStateManagement;
 
 namespace Bomberman.Players
 {
+    /// <summary>
+    /// Klasa gracza serowanego przez komputer
+    /// </summary>
     [Serializable]
     public class ComputerPlayer: GameActor
     {

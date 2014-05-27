@@ -6,6 +6,9 @@ using Bomberman.Utlis;
 
 namespace Bomberman.Algorithms
 {
+    /// <summary>
+    /// Klasa implementują algorytm losowy
+    /// </summary>
     [Serializable]
     public class RandomMove: AiAlgorithm
     {
