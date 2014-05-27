@@ -35,12 +35,13 @@ namespace Bomberman.Commands
         /// <param name="actor">Uczestnik gry</param>
         public void Execute(GameActor actor)
         {
-            if (actor.TreasureState.BombsCount > 0 && delay == 4)
+            if (actor.TreasureState.RemoteBombsCount > 0 && delay == 4)
             {
                 x = actor.CurrentUnit.X;
                 y = actor.CurrentUnit.Y;
                 actor.CurrentUnit.Initialize(manager, State.NormalBomb, true);
                 RemoteBombUnits.Add(new Tuple<int, int>(x, y));
+                actor.TreasureState.RemoteBombsCount--;
             }
             delay = (delay + 1) % 5;
 

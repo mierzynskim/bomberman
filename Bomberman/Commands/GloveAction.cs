@@ -89,6 +89,7 @@ namespace Bomberman.Commands
                         }
                         break;
                 }
+                actor.TreasureState.GlovesCount--;
             }
             delay = (delay + 1) % 5;
         }

@@ -18,7 +18,8 @@ namespace Bomberman.Players
         public HumanPlayer()
         {
             Velocity = 5;
-            TreasureState.BombsCount = LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].BombsStart;
+            
+            
         }
 
         public event ChangedEventHandler Changed;

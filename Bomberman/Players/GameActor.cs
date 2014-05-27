@@ -1,4 +1,5 @@
 ﻿using System;
+using Bomberman.StateImplementation;
 using Bomberman.Utlis;
 using GameStateManagement;
 
@@ -10,12 +11,11 @@ namespace Bomberman.Players
     [Serializable]
     public abstract class GameActor
     {
-
-        public GameActor()
+        protected GameActor()
         {
             TreasureState = new TreasureState();
             Velocity = 5;
-            TreasureState.BombsCount = 20;
+            TreasureState.BombsCount = LevelConsts.LevelProperties[MonoGameFileSystem.Instance.CurrentPlayerSettings.Level].BombsStart;
         }
         public int Velocity { get; set; }
 
