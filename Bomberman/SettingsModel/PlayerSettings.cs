@@ -28,7 +28,7 @@ namespace Bomberman.SettingsModel
             set
             {
                 highScores = value;
-                highScores = highScores.OrderBy(score => score.Points).Take(10).ToList();
+                highScores = highScores.OrderByDescending(score => score.Points).Take(10).ToList();
             }
         }
     }

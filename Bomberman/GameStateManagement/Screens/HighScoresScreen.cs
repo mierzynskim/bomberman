@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Bomberman.SettingsModel;
 using Bomberman.StateImplementation;
 using Bomberman.StateInterfaces;
@@ -25,9 +26,11 @@ namespace Bomberman.GameStateManagement.Screens
             // Create our menu entries.
 
             var menuitems = new List<MenuEntry>();
+            var list = MonoGameFileSystem.Instance.CurrentPlayerSettings.HighScores.OrderByDescending(score => score.Points)
+                .Take(10)
+                .ToList();
 
-
-            foreach (var highScore in MonoGameFileSystem.Instance.CurrentPlayerSettings.HighScores)
+            foreach (var highScore in list)
             {
                 var entry = new MenuEntry(highScore.Level + " " + highScore.Points.ToString(CultureInfo.InvariantCulture));
                 menuitems.Add(entry);
